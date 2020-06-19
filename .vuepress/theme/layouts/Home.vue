@@ -44,7 +44,7 @@ export default {
   computed: {
     posts() {
       return this.$site.pages
-        .filter(page => /^\/posts\//.test(page.regularPath))
+        .filter(page => /^\/posts\//.test(page.path))
         .sort((a, b) => {
           if (a.frontmatter.pin && !b.frontmatter.pin) {
             return -1;
