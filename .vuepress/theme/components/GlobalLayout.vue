@@ -18,7 +18,7 @@ div#main(v-swipeleft="swipeleft" v-swiperight="swiperight")
 </template>
 
 <script>
-import SearchBox from '@SearchBox'
+import SearchBox from '@theme/components/SearchBox.vue'
 export default {
   components: { SearchBox },
   data: () => ({

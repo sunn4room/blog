@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@vuepress/plugin-search": "^1.5.2",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
     "vuepress": "^1.5.1"
