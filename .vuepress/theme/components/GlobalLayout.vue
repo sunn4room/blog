@@ -4,7 +4,7 @@ div#main(v-swipeleft="swipeleft" v-swiperight="swiperight")
   div#sidebar.box(:class="{active: sidebarActive}" v-clickoutside="hideSidebar")
     vue-scroll(ref="sidebar")
       div#sidebar-content
-        div(style="display:flex;justify-content:center;margin-top:1rem")
+        div(style="display:flex;justify-content:center;padding-top:1rem")
           SearchBox
         div#hero
           img#hero-img(:src="require('@theme/assets/hero.png')")
