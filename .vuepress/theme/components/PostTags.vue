@@ -6,11 +6,8 @@ div.post-tags
       :class="{firstca:index == 0, endcd:index == post.frontmatter.categories.length - 1}"
     ) {{ca}}
     //- a.ca-div(v-if="index != post.frontmatter.categories.length - 1") &gt;
-    font-awesome-icon(
-      v-if="index != post.frontmatter.categories.length - 1"
-      :icon="['fa','caret-right']"
-      style="background-color:#409eff;color:white;height:1.5rem;position:relative;top:0.3rem"
-    )
+    span.ca-tag(v-if="index != post.frontmatter.categories.length - 1")
+      font-awesome-icon(:icon="['fa','caret-right']")
   template(v-if="post.frontmatter.tags" v-for="(tag,index) in post.frontmatter.tags")
     a.ta-tag(@click="$emit('postTagClick', ['TAGS', tag])") {{tag}}
 </template>
