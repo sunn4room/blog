@@ -13,7 +13,7 @@ GlobalLayout(ref="global")
       span(style="font-size:0.9rem;cursor: pointer" @click="qpClick(index)") {{p}}
       span(v-if="index != querypath.length - 1" style="font-size:0.9rem") &nbsp;&nbsp;&frasl;&nbsp;&nbsp;
   transition-group(name="ps" tag="div" mode="out-in")
-    div.box(v-for="p in postsinpage" :key="p.key")
+    div.box(v-for="p in postsinpage" :key="p.key+postKeyNum")
       PostTags(@postTagClick="changeQueryPath" :post="p")
       a.post-title(:href="p.path") {{p.title}}
       div.post-excerpt(v-if="p.excerpt" v-html="p.excerpt")
@@ -39,7 +39,8 @@ export default {
   data: () => ({
     querypath: [],
     p: 1,
-    pnum: 8
+    pnum: 8,
+    postKeyNum: 0
   }),
   computed: {
     posts() {
@@ -122,24 +123,29 @@ export default {
     tagClick(qp) {
       if (JSON.stringify(qp) == JSON.stringify(this.querypath)) return
       this.querypath = qp;
+      this.postKeyNum++
       this.$refs.global.hideSidebar()
     },
     pageup() {
       if (this.p != Math.ceil(this.curposts.length / this.pnum)) {
         this.p++;
+        this.postKeyNum++
       }
     },
     pagedown() {
       if (this.p != 1) {
         this.p--;
+        this.postKeyNum++
       }
     },
     changeQueryPath(qp) {
       this.querypath = qp
+      this.postKeyNum++
     },
     qpClick(index) {
       if (index == 0 || index == this.querypath.length - 1) return
       this.querypath = this.querypath.slice(0, index+1)
+      this.postKeyNum++
     }
   },
   mounted() {
