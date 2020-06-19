@@ -1,0 +1,15 @@
+@startuml
+interface Component {
+    void operate()
+}
+class Composite implements Component {
+    -List<Component> children
+    void add(Component c)
+    void remove(Component c)
+    void operate()
+}
+class Leaf implements Component {
+    void operate()
+}
+Component ..o "n" Composite
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+interface Product
+class Product1 implements Product
+class Product2 implements Product
+interface Factory {
+    Product createProduct()
+}
+class Factory1 implements Factory {
+    Product1 createProduct()
+}
+class Factory2 implements Factory {
+    Product2 createProduct()
+}
+Factory1 ..> Product1
+Factory2 ..> Product2
+@enduml

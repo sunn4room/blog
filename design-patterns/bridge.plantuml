@@ -1,0 +1,11 @@
+@startuml
+interface Feature
+class Feature1 implements Feature
+class Feature2 implements Feature
+abstract class NewFeature {
+    -Feature bridge
+}
+class NewFeature1 implements NewFeature
+class NewFeature2 implements NewFeature
+Feature .left.o NewFeature
+@enduml

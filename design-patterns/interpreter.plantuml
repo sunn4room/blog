@@ -1,0 +1,19 @@
+@startuml
+interface Interpreter<T> {
+    T interpret()
+}
+class Terminal<T> implements Interpreter {
+    T interpret()
+}
+class Nonterminal<T> implements Interpreter {
+    Interpreter i1
+    Interpreter i2
+    ...
+    T interpret()
+}
+Interpreter ..o Nonterminal
+class Parser {
+    Interpreter<T> build(String exp)
+}
+Parser .right.> Interpreter
+@enduml

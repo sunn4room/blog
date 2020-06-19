@@ -1,0 +1,9 @@
+@startuml
+class Component {
+    -List<Component> children
+    void add(Component c)
+    void remove(Component c)
+    void operate()
+}
+Component ..o "n" Component
+@enduml

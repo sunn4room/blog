@@ -1,0 +1,17 @@
+@startuml
+abstract class Colleague {
+    -Mediator mediator
+    {abstract} void request(String msg)
+    {abstract} void response(String msg)
+}
+class Colleague1 extends Colleague
+class Colleague2 extends Colleague
+abstract class Mediator {
+    -List<Colleague> list
+    void register(Colleague c)
+    {abstract} void relay(Colleague c, String msg)
+}
+class Mediator1 extends Mediator
+class Mediator2 extends Mediator
+Colleague o.left.o Mediator
+@enduml

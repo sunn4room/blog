@@ -1,0 +1,6 @@
+@startuml
+interface Subject
+interface NewSubject
+class NewSubjectImpl implements NewSubject
+class Adapter extends NewSubjectImpl implements Subject
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+interface Product1
+interface Product2
+class Product11 implements Product1
+class Product12 implements Product1
+class Product21 implements Product2
+class Product22 implements Product2
+interface Factory {
+    Product1 createProduct1()
+    Product2 createProduct2()
+}
+class Factory1 implements Factory {
+    Product11 createProduct1()
+    Product21 createProduct2()
+}
+class Factory2 implements Factory {
+    Product12 createProduct1()
+    Product22 createProduct2()
+}
+Factory1 ..> Product11
+Factory1 ..> Product21
+Factory2 ..> Product12
+Factory2 ..> Product22
+@enduml

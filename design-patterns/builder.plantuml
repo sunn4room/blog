@@ -1,0 +1,15 @@
+@startuml
+class Product
+abstract class Builder {
+    -Product product
+    {abstract} Product build()
+}
+class Builder1 extends Builder
+class Builder2 extends Builder
+class Director {
+    -Builder builder
+    Product getProduct()
+}
+Product .left.o Builder
+Builder .left.o Director
+@enduml

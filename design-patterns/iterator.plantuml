@@ -1,0 +1,10 @@
+@startuml
+interface Iterator<T> {
+    boolean hasNext()
+    T next()
+}
+interface Aggregate<T> {
+    {abstract} Iterator<T> getIterator()
+}
+Aggregate .left.> Iterator
+@enduml

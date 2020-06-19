@@ -1,0 +1,15 @@
+@startuml
+interface Flyweight
+class Flyweight1 implements Flyweight
+class Flyweight2 implements Flyweight
+class FlyweightFactory {
+    -Map<String,Flyweight> pool
+    getFlyweight(String key)
+}
+class Subject {
+    -Flyweight flyweight
+}
+Flyweight .down.o "n" FlyweightFactory
+Flyweight .down.o "1" Subject
+Subject .left.> FlyweightFactory
+@enduml

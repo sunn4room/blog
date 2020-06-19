@@ -1,0 +1,11 @@
+@startuml
+interface Strategy {
+    void operate()
+}
+class Strategy1 extends Strategy
+class Strategy2 extends Strategy
+class Subject {
+    -Strategy strategy
+}
+Strategy .left.o Subject
+@enduml

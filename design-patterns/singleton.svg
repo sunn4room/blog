@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="112px" preserveAspectRatio="none" style="width:154px;height:112px;" version="1.1" viewBox="0 0 154 112" width="154px" zoomAndPan="magnify"><defs><filter height="300%" id="fv2zmuhybrz6k" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--class Singleton--><rect fill="#FEFECE" filter="url(#fv2zmuhybrz6k)" height="93.0688" id="Singleton" style="stroke: #A80036; stroke-width: 1.5;" width="137" x="6" y="8"/><ellipse cx="44.85" cy="24" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M43.4281,29.3594 Q41.5688,29.3594 40.475,27.9688 Q39.3813,26.5781 39.3813,23.5938 Q39.3813,21.0625 40.5453,19.4063 Q41.7094,17.75 43.6938,17.75 Q45.1625,17.75 45.6313,17.875 Q46.1,18.0781 46.1,18.0781 Q46.1,18.0781 46.1,18.0078 Q46.1,17.9375 46.7094,17.0156 L47.7563,20.6719 L46.4281,21.0781 Q45.9594,19.5313 45.2953,18.8672 Q44.6313,18.2031 43.5688,18.2031 Q43.1781,18.2031 42.4125,19.7344 Q41.6469,21.2656 41.6469,23.5156 Q41.6469,25.9844 42.3109,27.375 Q42.975,28.7656 43.5063,28.7656 Q44.5688,28.7656 45.3266,28 Q46.0844,27.2344 46.4281,25.5781 L47.7563,26.1719 Q47.4281,27.5781 46.5297,28.4688 Q45.6313,29.3594 43.4281,29.3594 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="52" x="64.15" y="29.5576">Singleton</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="142" y1="40" y2="40"/><rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="14" y="48"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="88" x="26" y="56.606">Singleton instance</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="142" y1="63.0229" y2="63.0229"/><rect fill="#F24D5C" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="14" y="71.0229"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="52" x="26" y="79.6289">Singleton()</text><ellipse cx="17" cy="89.0459" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="111" x="26" y="94.6519">Singleton getInstance()</text><!--
+@startuml
+class Singleton {
+    {static} -Singleton instance
+    -Singleton()
+    {static} +Singleton getInstance()
+}
+@enduml
+
+PlantUML version 1.2019.09(Tue Aug 27 00:19:51 CST 2019)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_231-b11
+Operating System: Windows 10
+OS Version: 10.0
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

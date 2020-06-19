@@ -1,0 +1,10 @@
+@startuml
+interface Subject
+class Subject1 implements Subject
+class Subject2 implements Subject
+class Decorator {
+    -Subject subject
+}
+Decorator ..|> Subject
+Subject .down.o Decorator
+@enduml

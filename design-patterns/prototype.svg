@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="205px" preserveAspectRatio="none" style="width:130px;height:205px;" version="1.1" viewBox="0 0 130 205" width="130px" zoomAndPan="magnify"><defs><filter height="300%" id="f1okmq9hz2qao3" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--class Prototype--><rect fill="#FEFECE" filter="url(#f1okmq9hz2qao3)" height="63.0229" id="Prototype" style="stroke: #A80036; stroke-width: 1.5;" width="95" x="15" y="8"/><ellipse cx="34.95" cy="24" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M31.5438,18.2813 L31.5438,17.875 L37.8563,17.875 L37.8563,18.2813 L35.325,18.2813 Q35.325,18.2813 35.4734,18.4141 Q35.6219,18.5469 35.6219,18.8125 L35.6219,28.2969 Q35.6219,28.5625 35.8406,28.6953 Q36.0594,28.8281 36.0594,28.8281 L37.8563,28.8281 L37.8563,29.2344 L31.5438,29.2344 L31.5438,28.8281 L33.075,28.8281 Q33.4031,28.8281 33.5359,28.6953 Q33.6688,28.5625 33.6688,28.2969 L33.6688,18.8125 Q33.6688,18.5469 33.5359,18.4141 Q33.4031,18.2813 33.075,18.2813 L31.5438,18.2813 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="52" x="50.05" y="29.5576">Prototype</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="16" x2="109" y1="40" y2="40"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="16" x2="109" y1="48" y2="48"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="21" y="64.606">Prototype clone()</text><!--class PrototypeImpl--><rect fill="#FEFECE" filter="url(#f1okmq9hz2qao3)" height="63.0229" id="PrototypeImpl" style="stroke: #A80036; stroke-width: 1.5;" width="113" x="6" y="131"/><ellipse cx="23.7" cy="147" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M22.2781,152.3594 Q20.4188,152.3594 19.325,150.9688 Q18.2313,149.5781 18.2313,146.5938 Q18.2313,144.0625 19.3953,142.4063 Q20.5594,140.75 22.5438,140.75 Q24.0125,140.75 24.4813,140.875 Q24.95,141.0781 24.95,141.0781 Q24.95,141.0781 24.95,141.0078 Q24.95,140.9375 25.5594,140.0156 L26.6063,143.6719 L25.2781,144.0781 Q24.8094,142.5313 24.1453,141.8672 Q23.4813,141.2031 22.4188,141.2031 Q22.0281,141.2031 21.2625,142.7344 Q20.4969,144.2656 20.4969,146.5156 Q20.4969,148.9844 21.1609,150.375 Q21.825,151.7656 22.3563,151.7656 Q23.4188,151.7656 24.1766,151 Q24.9344,150.2344 25.2781,148.5781 L26.6063,149.1719 Q26.2781,150.5781 25.3797,151.4688 Q24.4813,152.3594 22.2781,152.3594 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="75" x="38.3" y="152.5576">PrototypeImpl</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="118" y1="163" y2="163"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="118" y1="171" y2="171"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="12" y="187.606">PrototypeImpl clone()</text><!--reverse link Prototype to PrototypeImpl--><path d="M62.5,91.293 C62.5,104.7857 62.5,118.9401 62.5,130.9764 " fill="none" id="Prototype&lt;-PrototypeImpl" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="55.5001,91.033,62.5,71.033,69.5001,91.033,55.5001,91.033" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+interface Prototype {
+    Prototype clone()
+}
+class PrototypeImpl implements Prototype {
+    PrototypeImpl clone()
+}
+@enduml
+
+PlantUML version 1.2019.09(Tue Aug 27 00:19:51 CST 2019)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_231-b11
+Operating System: Windows 10
+OS Version: 10.0
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

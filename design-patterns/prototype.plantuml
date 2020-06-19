@@ -1,0 +1,8 @@
+@startuml
+interface Prototype {
+    Prototype clone()
+}
+class PrototypeImpl implements Prototype {
+    PrototypeImpl clone()
+}
+@enduml

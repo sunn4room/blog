@@ -1,0 +1,7 @@
+@startuml
+class SubSystem1
+class SubSystem2
+class Facade
+SubSystem1 <.up. Facade
+SubSystem2 <.up. Facade
+@enduml

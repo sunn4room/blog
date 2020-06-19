@@ -1,0 +1,8 @@
+@startuml
+interface Subject
+class SubjectImpl implements Subject
+class Proxy implements Subject {
+    -SubjectImpl subject
+}
+SubjectImpl .left.o Proxy
+@enduml
