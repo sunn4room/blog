@@ -21,9 +21,9 @@ GlobalLayout(ref="global")
         span {{$moment(p.frontmatter.date).format('YYYY.MM.DD')}}
         span(v-if="p.frontmatter.updated") &nbsp;&minus;&nbsp;{{$moment(p.frontmatter.updated).format('YYYY.MM.DD')}}
   div.box(style="display:flex;justify-content:center;align-items:center")
-    button.page-button(@click="pagedown") &lt;
+    font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']")
     span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
-    button.page-button(@click="pageup") &gt;
+    font-awesome-icon.page-button(@click="pageup" :icon="['fa','angle-right']")
   div.box
     Valine
 </template>
@@ -177,10 +177,11 @@ export default {
   color #333
 .page-button
   height 2rem
-  width 2rem
+  width 2rem !important
+  padding 0.4rem
   background-color white
   border 1px solid #ddd
-  border-radius 0.5rem
+  border-radius 0.3rem
 .page-info
   margin 0px 2rem
 

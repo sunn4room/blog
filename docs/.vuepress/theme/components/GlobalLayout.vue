@@ -4,11 +4,13 @@ div#main(v-swipeleft="swipeleft" v-swiperight="swiperight")
   div#sidebar.box(:class="{active: sidebarActive}" v-clickoutside="hideSidebar")
     vue-scroll(ref="sidebar")
       div#sidebar-content
-        div#hero
+        div(style="display:flex;justify-content:center;margin-top:1rem")
           SearchBox
+        div#hero
           img#hero-img(:src="require('@theme/assets/hero.png')")
-          a.hero-str(style="font-size:1.2rem;font-weight:bold" href="/") sunn4room
-          a.hero-str(href="/") All is Well
+          div
+            a.hero-str(style="font-size:1.2rem;font-weight:bold" href="/") sunn4room
+            a.hero-str(href="/") All is Well
         slot(name="sidebar")
   vue-scroll(ref="main" @handle-scroll="mainScroll")
     div#main-content
@@ -131,18 +133,19 @@ code
     #hero
       padding-top 1rem
       display flex
-      flex-direction column
+      // flex-direction column
       align-items center
       background-color white
       // position sticky
       // top 0px
       #hero-img
-        height 100px
-        width 100px
-        border-radius 20px
-        margin-bottom 1rem
+        height 64px
+        width 64px
+        border-radius 32px
+        margin 1rem 1.5rem
       .hero-str
-        margin-bottom 1rem
+        margin-bottom 0.5rem
+        display: block
 .fixed-button
   height 50px
   width 50px

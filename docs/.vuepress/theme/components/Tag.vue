@@ -30,15 +30,15 @@ export default {
 
 <style lang="stylus">
 .tag-wrap
-  margin 0.5rem 0.25rem
+  margin 0.75rem 0.25rem
   display block
   &.is-tags
     display inline-block !important
-    margin 0.5rem 0.25rem 0rem
+    margin 0.75rem 0.25rem 0rem
 .tag-list
-  margin-left 0.5rem
+  margin-left 1rem
 .tag-name, .tag-number
-  font-size 0.8rem
+  font-size 0.9rem
   padding 0.15rem 0.4rem
 .tag-name
   border-radius 0.3rem 0rem 0rem 0.3rem

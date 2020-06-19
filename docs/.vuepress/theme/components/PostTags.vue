@@ -5,7 +5,12 @@ div.post-tags
       @click="$emit('postTagClick', ['CATEGORIES', ...post.frontmatter.categories.slice(0,index+1)])" 
       :class="{firstca:index == 0, endcd:index == post.frontmatter.categories.length - 1}"
     ) {{ca}}
-    a.ca-div(v-if="index != post.frontmatter.categories.length - 1") &gt;
+    //- a.ca-div(v-if="index != post.frontmatter.categories.length - 1") &gt;
+    font-awesome-icon(
+      v-if="index != post.frontmatter.categories.length - 1"
+      :icon="['fa','caret-right']"
+      style="background-color:#409eff;color:white;height:1.5rem;position:relative;top:0.3rem"
+    )
   template(v-if="post.frontmatter.tags" v-for="(tag,index) in post.frontmatter.tags")
     a.ta-tag(@click="$emit('postTagClick', ['TAGS', tag])") {{tag}}
 </template>
@@ -18,7 +23,7 @@ export default {
 
 <style lang="stylus">
 .ca-tag, .ca-div, .ta-tag
-  font-size 0.8rem
+  font-size 0.9rem
 .ta-tag
   padding 0.15rem 0.4rem
   border-radius 0.3rem
