@@ -34,6 +34,7 @@ export default {
   methods: {
     mainScroll: debounce(function(scrollTop) {
       let hs = this.$page.headers
+      if (!hs) return
       let temp = 0
       for (let i = 0; i < hs.length; i++) {
         if (scrollTop < document.getElementById(hs[i].slug).offsetTop) break

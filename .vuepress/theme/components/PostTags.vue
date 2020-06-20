@@ -11,6 +11,9 @@ div.post-tags
           font-awesome-icon(:icon="['fa','caret-right']")
   template(v-if="post.frontmatter.tags" v-for="(tag,index) in post.frontmatter.tags")
     a.ta-tag.post-tag(@click="$emit('postTagClick', ['TAGS', tag])") {{tag}}
+  template(v-if="post.frontmatter.pin")
+    span.ta-tag.post-tag(style="background-color:#f56c6c")
+      font-awesome-icon(:icon="['fa','star']")
 </template>
 
 <script>

@@ -15,7 +15,8 @@ GlobalLayout(ref="global")
   transition-group(name="ps" tag="div" mode="out-in")
     div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
       PostTags(@postTagClick="changeQueryPath" :post="p")
-      a.post-title(:href="p.path") {{p.title}}
+      div(style="margin-top:0.5rem")
+        a.post-title(:href="p.path" style="display:inline") {{p.title}}
         button(style="background-color: white; height:1.2rem; width: 1.2rem")
           font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
       Collapse
