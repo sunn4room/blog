@@ -3,6 +3,7 @@ title: Vue 学习笔记
 date: 2020-05-24 10:27:40
 updated: 2020-05-24 10:27:47
 categories:
+  - 学习笔记
   - 前端
 tags:
   - vue

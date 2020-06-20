@@ -3,6 +3,7 @@ title: kubernetes 学习笔记
 date: 2020-05-24 18:25:52
 updated: 2020-05-24 18:25:59
 categories:
+  - 学习笔记
   - 运维
 tags:
   - k8s

@@ -11,6 +11,8 @@ div.post-tags
           font-awesome-icon(:icon="['fa','caret-right']")
   template(v-if="post.frontmatter.tags" v-for="(tag,index) in post.frontmatter.tags")
     a.ta-tag.post-tag(@click="$emit('postTagClick', ['TAGS', tag])") {{tag}}
+  span.da-tag.post-tag {{$moment(post.frontmatter.date).format('YYYY.MM.DD')}}
+  span.uda-tag.post-tag(v-if="post.frontmatter.updated") {{$moment(post.frontmatter.updated).format('YYYY.MM.DD')}}
 </template>
 
 <script>
@@ -27,20 +29,22 @@ export default {
   .post-tag
     margin-right 0.5rem
     margin-bottom 0.5rem
-.ca-tag, .ca-div, .ta-tag
+.ca-tag, .ta-tag, .da-tag, .uda-tag
   font-size 0.9rem
-.ta-tag
   padding 0.15rem 0.4rem
+.da-tag
+  color #909399
+  background-color #f4f4f5
+.uda-tag
+  color #67c23a
+  background-color #f0f9eb
+.ta-tag
   border-radius 0.3rem
   color white
   background-color #67c23a
-.ca-tag, .ca-div
+.ca-tag
   color white
   background-color #409eff
-.ca-div
-  padding 0.15rem 0rem
-.ca-tag
-  padding 0.15rem 0.4rem
   &.firstca
     border-top-left-radius 0.3rem
     border-bottom-left-radius 0.3rem

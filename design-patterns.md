@@ -3,8 +3,7 @@ title: 面向对象设计模式
 date: 2020-05-23 18:04:00
 updated: 2020-05-23 18:04:08
 categories:
-  - 编程
-  - java
+  - 学习笔记
 tags:
   - oop
   - java

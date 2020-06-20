@@ -3,6 +3,7 @@ title: Nginx 学习笔记
 date: 2020-05-23 00:17:45
 updated: 2020-05-23 00:17:45
 categories:
+  - 学习笔记
   - 网络技术
 tags:
   - nginx

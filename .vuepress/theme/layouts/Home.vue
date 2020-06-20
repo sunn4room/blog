@@ -15,7 +15,6 @@ GlobalLayout(ref="global")
   transition-group(name="ps" tag="div" mode="out-in")
     div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
       PostTags(
-        v-if="p.frontmatter.categories || p.frontmatter.tags"
         @postTagClick="changeQueryPath" :post="p"
         style="margin-bottom: 0.3rem"
       )
@@ -24,14 +23,14 @@ GlobalLayout(ref="global")
           :href="p.path"
           :class="{'pinned-post': p.frontmatter.pin}"
         ) {{p.title}}
-        button(style="background-color: white; height:1.2rem; width: 1.2rem;margin-left:0.5rem")
+        button(
+          v-if="p.excerpt"
+          style="background-color: white; height:1.2rem; width: 1.2rem;margin-left:0.5rem"
+        )
           font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
-      Collapse
+      Collapse(v-if="p.excerpt")
         div(v-show="index == activeIndex")
-          div.post-excerpt(v-if="p.excerpt" v-html="p.excerpt")
-          span.date-tag(v-if="p.frontmatter.date")
-            span {{$moment(p.frontmatter.date).format('YYYY.MM.DD')}}
-            span(v-if="p.frontmatter.updated") &nbsp;&minus;&nbsp;{{$moment(p.frontmatter.updated).format('YYYY.MM.DD')}}
+          div.post-excerpt(v-html="p.excerpt")
   div.box(style="display:flex;justify-content:center;align-items:center")
     font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']")
     span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
@@ -186,7 +185,7 @@ export default {
   color #888
 .post-title
   display inline
-  font-size 1.2rem
+  font-size 1.1rem
   margin-top 0.5rem
   font-weight bold
   &.pinned-post:after

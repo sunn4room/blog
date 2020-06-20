@@ -3,6 +3,7 @@ title: pug 学习笔记
 date: 2020-05-21 09:19:54
 updated: 2020-05-21 09:19:54
 categories:
+  - 学习笔记
   - 前端
 tags:
   - pug
