@@ -1,15 +1,16 @@
 <template lang="pug">
 div.post-tags
-  template(v-if="post.frontmatter.categories" v-for="(ca,index) in post.frontmatter.categories")
-    a.ca-tag(
-      @click="$emit('postTagClick', ['CATEGORIES', ...post.frontmatter.categories.slice(0,index+1)])" 
-      :class="{firstca:index == 0, endcd:index == post.frontmatter.categories.length - 1}"
-    ) {{ca}}
-    //- a.ca-div(v-if="index != post.frontmatter.categories.length - 1") &gt;
-    span.ca-tag(v-if="index != post.frontmatter.categories.length - 1")
-      font-awesome-icon(:icon="['fa','caret-right']")
+  template(v-if="post.frontmatter.categories")
+    span.post-tag
+      span(v-for="(ca,index) in post.frontmatter.categories")
+        a.ca-tag(
+          @click="$emit('postTagClick', ['CATEGORIES', ...post.frontmatter.categories.slice(0,index+1)])" 
+          :class="{firstca:index == 0, endcd:index == post.frontmatter.categories.length - 1}"
+        ) {{ca}}
+        span.ca-tag(v-if="index != post.frontmatter.categories.length - 1")
+          font-awesome-icon(:icon="['fa','caret-right']")
   template(v-if="post.frontmatter.tags" v-for="(tag,index) in post.frontmatter.tags")
-    a.ta-tag(@click="$emit('postTagClick', ['TAGS', tag])") {{tag}}
+    a.ta-tag.post-tag(@click="$emit('postTagClick', ['TAGS', tag])") {{tag}}
 </template>
 
 <script>
@@ -19,6 +20,12 @@ export default {
 </script>
 
 <style lang="stylus">
+.post-tags
+  display flex
+  flex-wrap wrap
+  .post-tag
+    margin-right 0.5rem
+    margin-bottom 0.5rem
 .ca-tag, .ca-div, .ta-tag
   font-size 0.9rem
 .ta-tag
@@ -26,7 +33,6 @@ export default {
   border-radius 0.3rem
   color white
   background-color #67c23a
-  margin-left 0.5rem
 .ca-tag, .ca-div
   color white
   background-color #409eff

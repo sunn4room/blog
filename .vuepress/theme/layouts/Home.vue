@@ -13,13 +13,17 @@ GlobalLayout(ref="global")
       span(style="font-size:0.9rem;cursor: pointer" @click="qpClick(index)") {{p}}
       span(v-if="index != querypath.length - 1" style="font-size:0.9rem") &nbsp;&nbsp;&frasl;&nbsp;&nbsp;
   transition-group(name="ps" tag="div" mode="out-in")
-    div.box(v-for="p in postsinpage" :key="p.key+postKeyNum")
+    div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
       PostTags(@postTagClick="changeQueryPath" :post="p")
       a.post-title(:href="p.path") {{p.title}}
-      div.post-excerpt(v-if="p.excerpt" v-html="p.excerpt")
-      span.date-tag(v-if="p.frontmatter.date")
-        span {{$moment(p.frontmatter.date).format('YYYY.MM.DD')}}
-        span(v-if="p.frontmatter.updated") &nbsp;&minus;&nbsp;{{$moment(p.frontmatter.updated).format('YYYY.MM.DD')}}
+        button(style="background-color: white; height:1.2rem; width: 1.2rem")
+          font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
+      Collapse
+        div(v-show="index == activeIndex")
+          div.post-excerpt(v-if="p.excerpt" v-html="p.excerpt")
+          span.date-tag(v-if="p.frontmatter.date")
+            span {{$moment(p.frontmatter.date).format('YYYY.MM.DD')}}
+            span(v-if="p.frontmatter.updated") &nbsp;&minus;&nbsp;{{$moment(p.frontmatter.updated).format('YYYY.MM.DD')}}
   div.box(style="display:flex;justify-content:center;align-items:center")
     font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']")
     span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
@@ -33,14 +37,16 @@ import GlobalLayout from "@theme/components/GlobalLayout.vue";
 import Tag from "@theme/components/Tag.vue"
 import PostTags from "@theme/components/PostTags.vue"
 import Valine from "@theme/components/Valine.vue"
+import Collapse from "@theme/components/Collapse.vue"
 
 export default {
-  components: { GlobalLayout, Tag, PostTags, Valine },
+  components: { GlobalLayout, Tag, PostTags, Valine, Collapse },
   data: () => ({
     querypath: [],
     p: 1,
     pnum: 8,
-    postKeyNum: 0
+    postKeyNum: 0,
+    activeIndex: 0
   }),
   computed: {
     posts() {
@@ -120,32 +126,40 @@ export default {
     },
   },
   methods: {
+    setActiveIndex(i) {
+      this.activeIndex = i
+    },
     tagClick(qp) {
       if (JSON.stringify(qp) == JSON.stringify(this.querypath)) return
       this.querypath = qp;
       this.postKeyNum++
+      this.activeIndex = 0
       this.$refs.global.hideSidebar()
     },
     pageup() {
       if (this.p != Math.ceil(this.curposts.length / this.pnum)) {
         this.p++;
         this.postKeyNum++
+        this.activeIndex = 0
       }
     },
     pagedown() {
       if (this.p != 1) {
         this.p--;
         this.postKeyNum++
+        this.activeIndex = 0
       }
     },
     changeQueryPath(qp) {
       this.querypath = qp
       this.postKeyNum++
+      this.activeIndex = 0
     },
     qpClick(index) {
       if (index == 0 || index == this.querypath.length - 1) return
       this.querypath = this.querypath.slice(0, index+1)
       this.postKeyNum++
+      this.activeIndex = 0
     }
   },
   mounted() {
@@ -165,7 +179,7 @@ export default {
 .post-title
   display block
   font-size 1.2rem
-  margin-top 1rem
+  margin-top 0.5rem
   font-weight bold
 .post-excerpt
   font-size 0.9

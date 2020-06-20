@@ -49,7 +49,6 @@ export default {
   },
   mounted() {
     const cs = document.querySelectorAll('pre[class*="language-"]')
-    console.log(cs)
     cs.forEach(c => {
       c.addEventListener("touchstart", function(e) {
         e.stopPropagation()
