@@ -14,10 +14,17 @@ GlobalLayout(ref="global")
       span(v-if="index != querypath.length - 1" style="font-size:0.9rem") &nbsp;&nbsp;&frasl;&nbsp;&nbsp;
   transition-group(name="ps" tag="div" mode="out-in")
     div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
-      PostTags(@postTagClick="changeQueryPath" :post="p")
-      div(style="margin-top:0.5rem")
-        a.post-title(:href="p.path" style="display:inline") {{p.title}}
-        button(style="background-color: white; height:1.2rem; width: 1.2rem")
+      PostTags(
+        v-if="p.frontmatter.categories || p.frontmatter.tags"
+        @postTagClick="changeQueryPath" :post="p"
+        style="margin-bottom: 0.3rem"
+      )
+      div
+        a.post-title(
+          :href="p.path"
+          :class="{'pinned-post': p.frontmatter.pin}"
+        ) {{p.title}}
+        button(style="background-color: white; height:1.2rem; width: 1.2rem;margin-left:0.5rem")
           font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
       Collapse
         div(v-show="index == activeIndex")
@@ -178,10 +185,19 @@ export default {
   border-bottom 1px solid #ddd
   color #888
 .post-title
-  display block
+  display inline
   font-size 1.2rem
   margin-top 0.5rem
   font-weight bold
+  &.pinned-post:after
+    content '置顶'
+    color white
+    background-color #f56c6c
+    font-size 0.9rem
+    padding 0.15rem 0.4rem
+    border-radius 0.3rem
+    font-weight normal
+    margin-left 0.5rem
 .post-excerpt
   font-size 0.9
   margin-top 1rem

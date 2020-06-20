@@ -9,12 +9,12 @@ GlobalLayout(@mainScroll="mainScroll" ref="global")
       :href="'#'+h.slug"
       @click="$refs.global.hideSidebar()"
     ) {{h.title}}
-  div.box
+  div.box(v-if="$page.frontmatter.categories || $page.frontmatter.tags")
     PostTags(@postTagClick="goHomeWithPath" :post="$page")
   div.box
     h1 {{$page.title}}
     Content
-  div.box
+  div.box(v-if="$page.frontmatter.categories || $page.frontmatter.tags")
     PostTags(@postTagClick="goHomeWithPath" :post="$page")
   div.box
     Valine
