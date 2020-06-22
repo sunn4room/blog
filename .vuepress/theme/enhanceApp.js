@@ -9,6 +9,9 @@ import {
   FontAwesomeLayersText,
 } from "@fortawesome/vue-fontawesome";
 import moment from 'moment'
+import i18n from './i18n'
+
+
 
 library.add(fas, far, fab);
 
@@ -130,6 +133,7 @@ export default ({
     }
   })
   Vue.prototype.$moment = moment
+  Vue.prototype.$i18n = i18n
   Vue.directive("tap", {
     bind: function(el, binding) {
       new vueTouch(el, binding, "tap");

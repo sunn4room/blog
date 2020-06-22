@@ -1,20 +1,27 @@
 <!-- themePath/layouts/GlobalLayout.vue -->
 <template lang="pug">
-div#main(v-swipeleft="swipeleft" v-swiperight="swiperight")
+div#main(
+  v-swipeleft="swipeleft"
+  v-swiperight="swiperight"
+  :class="{'dark-mode': dark}"
+)
   div#sidebar.box(:class="{active: sidebarActive}" v-clickoutside="hideSidebar")
     vue-scroll(ref="sidebar")
       div#sidebar-content
-        div(style="display:flex;justify-content:center;padding-top:1rem")
+        div(style="display:flex;justify-content:space-between;padding-top:1rem")
+          button.switch-button(@click="switchLang") {{lang == 'zh' ? 'EN' : '中文'}}
           SearchBox
+          button.switch-button
+            font-awesome-icon(@click="switchColor" :icon="['far',dark?'sun':'moon']")
         div#hero
           img#hero-img(:src="require('@theme/assets/hero.png')")
           div
             a.hero-str(style="font-size:1.2rem;font-weight:bold" href="/") sunn4room
             a.hero-str(href="/") All is Well
-        slot(name="sidebar")
+        slot(name="sidebar" :lang="lang")
   vue-scroll(ref="main" @handle-scroll="mainScroll")
     div#main-content
-      slot
+      slot(:lang="lang")
 </template>
 
 <script>
@@ -23,6 +30,8 @@ export default {
   components: { SearchBox },
   data: () => ({
     sidebarActive: false,
+    lang: 'zh',
+    dark: false
   }),
   computed: {
     layout() {
@@ -75,6 +84,13 @@ export default {
           "easeInQuad"
         );
       }
+    },
+    switchLang() {
+      if (this.lang == 'zh') this.lang = 'en'
+      else this.lang = 'zh'
+    },
+    switchColor() {
+      this.dark = ! this.dark
     }
   },
 };
@@ -90,6 +106,24 @@ export default {
 *
   box-sizing border-box
 
+:root
+  --bg1 white
+  --bg2 #f3f3f3
+  --bg3 #ccc
+
+  --fg1 black
+  --fg2 #333
+  --fg3 #777
+
+.dark-mode
+  --bg1 #333
+  --bg2 #444
+  --bg3 #777
+
+  --fg1 white
+  --fg2 #ddd
+  --fg3 #999
+
 html
   font-size 16px
   font-family -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif
@@ -100,7 +134,7 @@ html
 body
   margin 0px
   padding 0px
-  background-color #f7f7f7
+  color var(--fg1)
   min-height 100vh
 
 code
@@ -109,6 +143,7 @@ code
 #main
   height 100vh
   width 100%
+  background-color var(--bg2)
   padding-left 300px
   transition padding-left 0.3s
   #main-content
@@ -127,18 +162,14 @@ code
   transition left 0.3s
   height 100vh
   width 300px
-  background-color white
+  background-color var(--bg1)
   overflow auto
   #sidebar-content
     padding 0rem 1rem
     #hero
       padding-top 1rem
       display flex
-      // flex-direction column
       align-items center
-      background-color white
-      // position sticky
-      // top 0px
       #hero-img
         height 64px
         width 64px
@@ -147,14 +178,6 @@ code
       .hero-str
         margin-bottom 0.5rem
         display: block
-.fixed-button
-  height 50px
-  width 50px
-  position fixed
-  right 10px
-  background-color white
-  border 1px solid rgba(0,0,0,0.1)
-  opacity 0.7
 #sidebar-toggler
   display none
   bottom 10px
@@ -176,11 +199,11 @@ code
 
 .box
   box-shadow 0 4px 10px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.1)
-  background-color white
-
+  background-color var(--bg1)
+  color var(--fg1)
 a
   text-decoration none
-  color black
+  color var(--fg1)
   cursor pointer
 button
   margin: 0px;
@@ -188,11 +211,18 @@ button
   border: 0px;
   outline: none;
 hr
-  background-color #eee
+  background-color var(--bg3)
   height 1px
   border:none
 img
   display block
   margin 1rem auto
   max-width calc(100% - 2rem)
+
+.switch-button
+  width 3rem
+  background-color var(--bg1)
+  color var(--fg2)
+  border-radius 0.3rem
+  border 1px solid var(--bg3)
 </style>

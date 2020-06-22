@@ -116,8 +116,10 @@ blockquote
   border-left: 4px solid #42b983;
   font-size: 1rem;
   background-color: #ecf8f2;
-  color: #333;
+  color: var(--fg2);
   padding: 0.1rem 1rem;
+.dark-mode blockquote
+  background-color #287850
 a.header-anchor
   font-size: .85em;
   float: left;
@@ -128,13 +130,13 @@ a.header-anchor
 
 .header-tag
   line-height 1.8rem
-  color #333
+  color var(--fg2)
   display block
   &.active
     color #3eaf7c
     font-weight bold
   &:hover
-    background-color #eee
+    background-color var(--bg2)
   &.endtag
     margin-bottom 1.5rem
 </style>

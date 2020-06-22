@@ -1,4 +1,7 @@
 module.exports = {
-  plugins: [
-  ],
+  plugins: {
+    '@vuepress/medium-zoom': {
+      selector: '.content__default img'
+    }
+  }
 };

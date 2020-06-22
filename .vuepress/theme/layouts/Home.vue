@@ -1,42 +1,46 @@
 <template lang="pug">
 GlobalLayout(ref="global")
-  template(v-slot:sidebar)
-    div.tab(style="margin-top:1.5rem") ALL
-    Tag.is-all(@tagClick="tagClick" :tag="{name: 'ALL', posts:posts, path:['ALL']}")
-    div.tab CATEGORIES
+  template(v-slot:sidebar="props")
+    div.tab(style="margin-top:1.5rem") {{$i18n[props.lang].all}}
+    Tag.is-all(@tagClick="tagClick" :tag="{name: $i18n[props.lang].all, posts:posts, path:['ALL']}")
+    div.tab {{$i18n[props.lang].categories}}
     Tag.is-categories(@tagClick="tagClick" v-for="ca in categories" :tag="ca")
-    div.tab TAGS
+    div.tab {{$i18n[props.lang].tags}}
     Tag.is-tags(@tagClick="tagClick" v-for="(ps,tag) in tags" :tag="{name:tag,posts:ps,path:['TAGS',tag]}")
     div(style="height:1.5rem")
-  div.box
-    template(v-for="(p,index) in querypath")
-      span(style="font-size:0.9rem;cursor: pointer" @click="qpClick(index)") {{p}}
-      span(v-if="index != querypath.length - 1" style="font-size:0.9rem") &nbsp;&nbsp;&frasl;&nbsp;&nbsp;
-  transition-group(name="ps" tag="div" mode="out-in")
-    div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
-      PostTags(
-        @postTagClick="changeQueryPath" :post="p"
-        style="margin-bottom: 0.3rem"
-      )
-      div
-        a.post-title(
-          :href="p.path"
-          :class="{'pinned-post': p.frontmatter.pin}"
-        ) {{p.title}}
-        button(
-          v-if="p.excerpt"
-          style="background-color: white; height:1.2rem; width: 1.2rem;margin-left:0.5rem"
+  template(v-slot:default="props")
+    div.box
+      template(v-for="(p,index) in querypath")
+        span(
+          style="font-size:0.9rem;cursor: pointer"
+          @click="qpClick(index)"
+        ) {{index == 0?$i18n[props.lang][p.toLowerCase()]:p}}
+        span(v-if="index != querypath.length - 1" style="font-size:0.9rem") &nbsp;&nbsp;&frasl;&nbsp;&nbsp;
+    transition-group(name="ps" tag="div" mode="out-in")
+      div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
+        PostTags(
+          @postTagClick="changeQueryPath" :post="p"
+          style="margin-bottom: 0.3rem"
         )
-          font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
-      Collapse(v-if="p.excerpt")
-        div(v-show="index == activeIndex")
-          div.post-excerpt(v-html="p.excerpt")
-  div.box(style="display:flex;justify-content:center;align-items:center")
-    font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']")
-    span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
-    font-awesome-icon.page-button(@click="pageup" :icon="['fa','angle-right']")
-  div.box
-    Valine
+        div
+          a.post-title(
+            :href="p.path"
+            :class="{'pinned-post': p.frontmatter.pin}"
+          ) {{p.title}}
+          button(
+            v-if="p.excerpt"
+            style="background-color: white; height:1.2rem; width: 1.2rem;margin-left:0.5rem"
+          )
+            font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
+        Collapse(v-if="p.excerpt")
+          div(v-show="index == activeIndex")
+            div.post-excerpt(v-html="p.excerpt")
+    div.box(style="display:flex;justify-content:center;align-items:center")
+      font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']")
+      span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
+      font-awesome-icon.page-button(@click="pageup" :icon="['fa','angle-right']")
+    div.box
+      Valine
 </template>
 
 <script>
@@ -181,8 +185,8 @@ export default {
   margin-top 1rem
   line-height 1.1rem
   font-size 0.8rem
-  border-bottom 1px solid #ddd
-  color #888
+  border-bottom 1px solid var(--bg3)
+  color var(--bg3)
 .post-title
   display inline
   font-size 1.1rem

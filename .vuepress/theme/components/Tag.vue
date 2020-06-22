@@ -4,8 +4,8 @@ div.tag-wrap
     span.tag-name {{tag.name}}
     span.tag-number {{tag.posts.length}}
   template(v-if="tag.children&&tag.children.length != 0")
-    button(@click="setShow" style="background-color: white; height:1.2rem; width: 1.2rem")
-      font-awesome-icon(:icon="['fa',showList?'caret-down':'caret-right']" size="lg" style="color:#409eff")
+    button(@click="setShow" style="background-color: var(--bg1); height:1.2rem; width: 1.2rem")
+      font-awesome-icon(:icon="['fa',showList?'caret-down':'caret-right']" size="lg" style="color:var(--fg1)")
     div.tag-list(:style="{display: showList?'block':'none'}")
       Tag(@tagClick="tagClick" v-for="t in tag.children" :tag="t")
 </template>
@@ -44,8 +44,8 @@ export default {
   border-radius 0.3rem 0rem 0rem 0.3rem
 .tag-number
   border-radius 0rem 0.3rem 0.3rem 0rem
-  background-color #eee
-  color #333
+  background-color var(--bg2)
+  color var(--fg2)
 .is-all .tag-name
     color white
     background-color #909399

@@ -6,7 +6,7 @@ div.post-tags
         a(
           @click="$emit('postTagClick', ['CATEGORIES', ...post.frontmatter.categories.slice(0,index+1)])" 
           :class="{firstca:index == 0, endcd:index == post.frontmatter.categories.length - 1}"
-          style="color:white"
+          style="color: white"
         ) {{ca}}
         span(v-if="index != post.frontmatter.categories.length - 1")
           font-awesome-icon(:icon="['fa','caret-right']" style="width:1rem")
@@ -43,8 +43,9 @@ export default {
       background-color #67c23a
     &.da-tag
       color #909399
-      background-color #f4f4f5
+      background-color var(--bg2)
+      
     &.uda-tag
       color #67c23a
-      background-color #f0f9eb
+      background-color var(--bg2)
 </style>

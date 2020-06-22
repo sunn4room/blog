@@ -36,12 +36,12 @@ pre[class*="language-"] {
   overflow: auto;
 }
 
-p code, li code {
-	color: #476582;
+p > code, li > code {
+	color: var(--fg2);
 	padding: .25rem .5rem;
 	margin: 0;
 	font-size: .85rem;
-	background-color: rgba(27,31,35,.05);
+	background-color: var(--bg2);
 	border-radius: 3px;
   font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace !important;
 }
