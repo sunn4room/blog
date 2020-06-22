@@ -3,10 +3,11 @@ title: kubernetes 学习笔记
 date: 2020-05-24 18:25:52
 updated: 2020-05-24 18:25:59
 categories:
-  - 学习笔记
-  - 运维
+- 运维
 tags:
-  - k8s
+- 学习笔记
+- k8s
+- kubernetes
 ---
 
 Kubernetes 是时下最流行的开源的集群容器编排工具。

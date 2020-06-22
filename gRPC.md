@@ -3,11 +3,11 @@ title: gRPC 学习笔记
 date: 2020-05-24 17:56:40
 updated: 2020-05-24 17:56:52
 categories:
-  - 学习笔记
-  - 网络技术
+- 网络技术
 tags:
-  - gRPC
-  - RPC
+- 学习笔记
+- gRPC
+- RPC
 ---
 
 gRPC 是一个开源的高性能的语言无关的平台无关的 RPC 框架。

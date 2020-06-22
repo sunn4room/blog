@@ -3,12 +3,12 @@ title: Nginx 学习笔记
 date: 2020-05-23 00:17:45
 updated: 2020-05-23 00:17:45
 categories:
-  - 学习笔记
-  - 网络技术
+- 网络技术
 tags:
-  - nginx
-  - load balance
-  - http
+- 学习笔记
+- nginx
+- load balance
+- http
 ---
 
 Nginx 是一个高性能的 http 和 反向代理的 web 服务器，占用内存少，并发能力强

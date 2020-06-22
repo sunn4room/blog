@@ -3,11 +3,11 @@ title: pug 学习笔记
 date: 2020-05-21 09:19:54
 updated: 2020-05-21 09:19:54
 categories:
-  - 学习笔记
-  - 前端
+- 前端渲染
 tags:
-  - pug
-  - html
+- 学习笔记
+- pug
+- html
 ---
 
 pug 是从 jade 衍变过来的，是使用 JavaScript 实现的标记语言模板引擎，其语法和 yaml 非常类似。

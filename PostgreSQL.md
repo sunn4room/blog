@@ -4,11 +4,12 @@ date: 2020-06-21 10:07:42
 updated: 2020-06-21 10:07:50
 categories:
 - 数据库
+- SQL
 tags:
 - 学习笔记
+- PostgreSQL
+- SQL
 ---
-
-<img src="./PostgreSQL/timg.jpg" alt="img" style="zoom:50%;" />
 
 PostgreSQL 是一个开源的对象关系型数据库
 
