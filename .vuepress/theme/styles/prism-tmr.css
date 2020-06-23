@@ -53,6 +53,11 @@ pre[class*="language-"] {
   border-right: 4px solid #aaa;
 }
 
+.dark-mode :not(pre) > code[class*="language-"],
+.dark-mode pre[class*="language-"] {
+  background: #222;
+}
+
 /* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;

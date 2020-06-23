@@ -7,12 +7,12 @@ div#main(
   div#sidebar.box(:class="{active: sidebarActive}" v-clickoutside="hideSidebar")
     vue-scroll(ref="sidebar")
       div#sidebar-content
-        div(style="display:flex;justify-content:space-between;padding-top:1rem")
+        div(style="display:flex;justify-content:space-between;padding-top:1rem;max-width: calc(300px - 2rem)")
           button.switch-button(@click="switchLang") {{lang == 'zh' ? 'EN' : '中文'}}
           SearchBox
           button.switch-button(@click="switchColor")
             font-awesome-icon(:icon="['far',dark?'sun':'moon']")
-        div#hero
+        div#hero(style="max-width: calc(300px - 2rem)")
           img#hero-img(:src="require('@theme/assets/hero.png')")
           div
             a.hero-str(style="font-size:1.2rem;font-weight:bold" href="/") sunn4room

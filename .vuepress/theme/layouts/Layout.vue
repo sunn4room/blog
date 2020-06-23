@@ -139,4 +139,20 @@ a.header-anchor
     background-color var(--bg2)
   &.endtag
     margin-bottom 1.5rem
+
+table
+  border-collapse collapse
+  margin 1rem 0
+  display: block
+  overflow-x: auto
+
+tr
+  border-top 1px solid #dfe2e5
+
+  &:nth-child(2n)
+    background-color #f6f8fa
+
+th, td
+  border 1px solid #dfe2e5
+  padding .6em 1em
 </style>
