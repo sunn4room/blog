@@ -110,7 +110,7 @@ ol:first-child
 
 ul:last-child,
 ol:last-child
-  margin-bottom: 0;
+  margin-bottom: 0.75rem;
 
 blockquote
   border-left: 4px solid #42b983;
@@ -150,7 +150,7 @@ tr
   border-top 1px solid #dfe2e5
 
   &:nth-child(2n)
-    background-color #f6f8fa
+    background-color var(--bg2)
 
 th, td
   border 1px solid #dfe2e5
