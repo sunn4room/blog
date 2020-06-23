@@ -34,7 +34,7 @@ export default {
   }),
   mounted() {
     this.lang = this.$cookies.get('lang') || 'zh'
-    this.dark = this.$cookies.isKey('dark') ? this.$cookies.get('dark') : (this.$moment().hour() >= 19 || this.$moment().hour() <= 6)
+    this.dark = this.$cookies.isKey('dark') ? (this.$cookies.get('dark') == 'true') : (this.$moment().hour() >= 19 || this.$moment().hour() <= 6)
   },
   watch: {
     dark(val) {
