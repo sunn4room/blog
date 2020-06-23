@@ -119,7 +119,7 @@ blockquote
   color: var(--fg2);
   padding: 0.1rem 1rem;
 .dark-mode blockquote
-  background-color #287850
+  background-color #1C5538
 a.header-anchor
   font-size: .85em;
   float: left;

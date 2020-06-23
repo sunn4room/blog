@@ -3,7 +3,6 @@
 div#main(
   v-swipeleft="swipeleft"
   v-swiperight="swiperight"
-  :class="{'dark-mode': dark}"
 )
   div#sidebar.box(:class="{active: sidebarActive}" v-clickoutside="hideSidebar")
     vue-scroll(ref="sidebar")
@@ -11,8 +10,8 @@ div#main(
         div(style="display:flex;justify-content:space-between;padding-top:1rem")
           button.switch-button(@click="switchLang") {{lang == 'zh' ? 'EN' : '中文'}}
           SearchBox
-          button.switch-button
-            font-awesome-icon(@click="switchColor" :icon="['far',dark?'sun':'moon']")
+          button.switch-button(@click="switchColor")
+            font-awesome-icon(:icon="['far',dark?'sun':'moon']")
         div#hero
           img#hero-img(:src="require('@theme/assets/hero.png')")
           div
@@ -30,9 +29,22 @@ export default {
   components: { SearchBox },
   data: () => ({
     sidebarActive: false,
-    lang: 'zh',
+    lang: 'zh' ,
     dark: false
   }),
+  mounted() {
+    this.lang = this.$cookies.get('lang') || 'zh'
+    this.dark = this.$cookies.isKey('dark') ? this.$cookies.get('dark') : (this.$moment().hour() >= 19 || this.$moment().hour() <= 6)
+  },
+  watch: {
+    dark(val) {
+      if (val) {
+        document.querySelector("html").classList.add("dark-mode")
+      } else {
+        document.querySelector("html").classList.remove("dark-mode")
+      }
+    }
+  },
   computed: {
     layout() {
       if (this.$page.path) {
@@ -88,9 +100,11 @@ export default {
     switchLang() {
       if (this.lang == 'zh') this.lang = 'en'
       else this.lang = 'zh'
+      this.$cookies.set('lang', this.lang, 60 * 60 * 24 * 7)
     },
     switchColor() {
       this.dark = ! this.dark
+      this.$cookies.set('dark', this.dark, 60 * 60)
     }
   },
 };
@@ -115,14 +129,20 @@ export default {
   --fg2 #333
   --fg3 #777
 
-.dark-mode
-  --bg1 #333
-  --bg2 #444
-  --bg3 #777
+  --blue #409eff
+  --green #67c23a
 
-  --fg1 white
-  --fg2 #ddd
-  --fg3 #999
+.dark-mode
+  --bg1 #2b2b2b
+  --bg2 #333333
+  --bg3 #6a6a6a
+
+  --fg1 #cbcbcb
+  --fg2 #8f8f8f
+  --fg3 #7a7a7a
+
+  --blue #0466c8
+  --green #458725
 
 html
   font-size 16px

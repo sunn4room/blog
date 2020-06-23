@@ -29,9 +29,9 @@ GlobalLayout(ref="global")
           ) {{p.title}}
           button(
             v-if="p.excerpt"
-            style="background-color: white; height:1.2rem; width: 1.2rem;margin-left:0.5rem"
+            style="background-color: var(--bg1); height:1.2rem; width: 1.2rem;margin-left:0.5rem"
           )
-            font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:#409eff")
+            font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg" style="color:var(--blue)")
         Collapse(v-if="p.excerpt")
           div(v-show="index == activeIndex")
             div.post-excerpt(v-html="p.excerpt")
@@ -205,7 +205,7 @@ export default {
   font-size 0.9
   margin-top 1rem
   line-height 1.6rem
-  color #333
+  color var(--fg2)
   p
     margin-bottom 0rem
 .date-tag
@@ -219,8 +219,9 @@ export default {
   height 2rem
   width 2rem !important
   padding 0.4rem
-  background-color white
-  border 1px solid #ddd
+  background-color var(--bg1)
+  border 1px solid var(--bg3)
+  color var(--fg2)
   border-radius 0.3rem
 .page-info
   margin 0px 2rem

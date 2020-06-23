@@ -37,10 +37,10 @@ export default {
     padding 0.15rem 0.4rem
     &.ca-tag
       color white
-      background-color #409eff
+      background-color var(--blue)
     &.ta-tag
       color white
-      background-color #67c23a
+      background-color var(--green)
     &.da-tag
       color #909399
       background-color var(--bg2)

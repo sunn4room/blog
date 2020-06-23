@@ -47,12 +47,12 @@ export default {
   background-color var(--bg2)
   color var(--fg2)
 .is-all .tag-name
-    color white
-    background-color #909399
+  color white
+  background-color #909399
 .is-categories .tag-name
-    color white
-    background-color #409eff
+  color white
+  background-color var(--blue)
 .is-tags .tag-name
-    color white
-    background-color #67c23a
+  color white
+  background-color var(--green)
 </style>

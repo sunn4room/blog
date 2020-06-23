@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/vue-fontawesome";
 import moment from 'moment'
 import i18n from './i18n'
+import VueCookies from 'vue-cookies'
 
 
 
@@ -134,6 +135,7 @@ export default ({
   })
   Vue.prototype.$moment = moment
   Vue.prototype.$i18n = i18n
+  Vue.use(VueCookies)
   Vue.directive("tap", {
     bind: function(el, binding) {
       new vueTouch(el, binding, "tap");
