@@ -31,7 +31,7 @@ $ createdb [-U _pg-user] _db-name
 $ dropdb [-U _pg-user] _db-name
 $ psql [-U _pg-user] _db-name
 _db-name=> \h
-_db-name=> _sql
+_db-name=> _sql;
 _db-name=> \i _sql-file
 _db-name=> \q
 ```
