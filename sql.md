@@ -146,3 +146,9 @@ CREATE VIEW _view-name AS SELECT ...;
 ```sql
 DROP VIEW _view-name;
 ```
+
+## 三大范式
+
+- 所有字段都是不需分解的原子字段
+- 拥有主键字段，且所有非主键字段完全依赖于主键字段
+- 非主键字段之间不能存在依赖关系
