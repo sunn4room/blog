@@ -4,7 +4,7 @@
 
 MongoDB 是一个综合性能的、无模式的、分布式的文档数据库解决方案。
 
-![](./mongo/mongodb层次.svg)
+![](./mongo/mongodb.svg)
 
 ## 数据类型
 

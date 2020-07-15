@@ -4,7 +4,7 @@
 
 ## 架构设计
 
-![](./mysql/mysql架构.svg)
+![](./mysql/mysql.svg)
 
 ## 配置文件
 
