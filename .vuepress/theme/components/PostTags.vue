@@ -1,6 +1,6 @@
 <template lang="pug">
 div.post-tags
-  template(v-if="post.frontmatter.categories")
+  template(v-if="post.frontmatter.categories && post.frontmatter.categories.length != 0")
     span.post-tag.ca-tag
       span(v-for="(ca,index) in post.frontmatter.categories")
         a(

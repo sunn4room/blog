@@ -1,9 +1,0 @@
-@startuml
-abstract class Chain {
-    -Chain next
-    {abstract} void handle(String msg)
-}
-class Chain1 extends Chain
-class Chain2 extends Chain
-Chain ..o Chain
-@enduml

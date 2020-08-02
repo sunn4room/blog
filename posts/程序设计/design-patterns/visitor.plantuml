@@ -1,0 +1,21 @@
+@startuml
+interface Element {
+    void accept(Visitor v)
+}
+class Element1 implements Element {
+    void accept(Visitor v)
+    void method1()
+}
+class Element2 implements Element {
+    void accept(Visitor v)
+    void method2()
+}
+interface Visitor {
+    void visit(Element1 e)
+    void visit(Element2 e)
+}
+class Visitor1 implements Visitor
+class Visitor2 implements Visitor
+Visitor .up.> Element1
+Visitor .up.> Element2
+@enduml

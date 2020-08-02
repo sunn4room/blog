@@ -77,26 +77,28 @@ export default {
       let categories = [];
       this.posts.forEach(page => {
         let ns = categories;
-        if (page.frontmatter.categories) {
-          let cateindex = 1;
-          page.frontmatter.categories.forEach(category => {
-            let f = ns.find(n => n.name == category);
-            if (f) {
-              f.posts.push(page);
-              ns = f.children;
-            } else {
-              let newnode = {
-                name: category,
-                children: [],
-                posts: [page],
-                path: ['CATEGORIES', ...page.frontmatter.categories.slice(0, cateindex)],
-              };
-              ns.push(newnode);
-              ns = newnode.children;
-            }
-            cateindex++;
-          });
-        }
+        let cs = page.relativePath.split("/")
+        cs.shift()
+        cs.pop()
+        page.frontmatter.categories = cs
+        let cateindex = 1;
+        cs.forEach(category => {
+          let f = ns.find(n => n.name == category);
+          if (f) {
+            f.posts.push(page);
+            ns = f.children;
+          } else {
+            let newnode = {
+              name: category,
+              children: [],
+              posts: [page],
+              path: ['CATEGORIES', ...cs.slice(0, cateindex)],
+            };
+            ns.push(newnode);
+            ns = newnode.children;
+          }
+          cateindex++;
+        });
       });
       return categories;
     },

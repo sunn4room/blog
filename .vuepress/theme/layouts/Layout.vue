@@ -61,6 +61,12 @@ export default {
         e.stopPropagation()
       })
     })
+  },
+  beforeMount() {
+    let cates = this.$page.relativePath.split("/")
+    cates.shift()
+    cates.pop()
+    this.$page.frontmatter.categories = cates
   }
 };
 </script>

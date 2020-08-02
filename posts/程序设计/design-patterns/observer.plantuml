@@ -1,0 +1,14 @@
+@startuml
+interface Observer {
+    void response()
+}
+class Observer1 implements Observer
+class Observer2 implements Observer
+class Subject {
+    -List<Observer> list
+    void register(Observer o)
+    void notify()
+}
+Observer .left.o Subject
+Subject ..> Observer
+@enduml

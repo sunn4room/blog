@@ -1,0 +1,6 @@
+@startuml
+interface Cloneable
+abstract class AbstractBootstrap implements Cloneable
+class Bootstrap extends AbstractBootstrap
+class ServerBootstrap extends AbstractBootstrap
+@enduml

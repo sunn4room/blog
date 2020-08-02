@@ -1,0 +1,8 @@
+@startuml
+interface ScheduledExecutorService
+interface EventExecutorGroup extends ScheduledExecutorService
+interface EventExecutor extends EventExecutorGroup
+interface OrderedEventExecutor extends EventExecutor
+interface EventLoopGroup extends EventExecutorGroup
+interface EventLoop extends EventLoopGroup,OrderedEventExecutor
+@enduml
