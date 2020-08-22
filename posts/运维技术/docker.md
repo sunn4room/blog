@@ -53,6 +53,7 @@ $ docker run <options> <image> <start-cmd>
 	# --entrypoint <entry-cmd>
 	# --memory, -m <memory-size>
 	# --cpu-shares, -c <cpu-weight>
+	# --link c1,c2 
 ```
 
 ## docker create
@@ -202,8 +203,13 @@ $ docker rmi <image>
 ```bash
 $ docker network create <options> <net-name>
 	# --driver bridge/host
+	# --subnet 172.18.0.0/16
 $ docker network ls
 $ docker network rm <net-name>
+
+$ docker run ... --network xxx ...
+$ docker run ... --network xxx --ip xxx.xxx.xxx.xxx ... # 需指定subnet
+$ docker run ... --network container:xxx ... # 共享容器的网络空间
 ```
 
 ## docker compose
@@ -226,7 +232,10 @@ services:
     enviroment:
     - xx=xx
     - xx=xx
-    command: <command>
+    entrypoint:
+    - xxx
+    command:
+    - xxx
     depends_on:
     - xx
     - xx
@@ -239,6 +248,10 @@ services:
     tty: true
 volumes:
   xxx: {}
+networks:
+  xxx:
+    driver: bridge
+    subnet: xxx.xxx.xxx.xxx/xx
 ```
 
 ```sh

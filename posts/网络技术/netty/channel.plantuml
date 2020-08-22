@@ -1,0 +1,91 @@
+@startuml
+interface ChannelInboundInvoker {
+    fireChannelRegistered()
+    fireChannelUnregistered()
+    fireChannelActive()
+    fireChannelInactive()
+    fireExceptionCaught(cause)
+    fireUserEventTriggered(event)
+    fireChannelRead(msg)
+    fireChannelReadComplete()
+    fireChannelWritabilityChanged()
+}
+interface ChannelOutboundInvoker {
+    ChannelFuture bind(local)
+    ChannelFuture close()
+    ChannelFuture connect(remote)
+    ChannelFuture disconnect()
+    ChannelFuture deregister()
+    ChannelPromise newPromise()
+    read()
+    ChannelFuture write(msg)
+}
+interface ChannelHandlerContext extends ChannelInboundInvoker, ChannelOutboundInvoker {
+    Channel channel()
+    EventExecutor executor()
+    ChannelHandler handler()
+    ChannelPipeline pipeline()
+}
+interface ChannelPipeline extends ChannelInboundInvoker, ChannelOutboundInvoker {
+    addFirst(handler...)
+    addLast(handler...)
+    removeFirst()
+    removeLast()
+    Channel channel()
+    ChannelHandlerContext context(handler)
+}
+interface Channel {
+    parent()
+    EventLoop eventLoop()
+    ChannelPipeline pipeline()
+}
+class DefaultChannelPipeline implements ChannelPipeline
+abstract class AbstractChannelHandlerContext implements ChannelHandlerContext
+class DefaultChannelHandlerContext extends AbstractChannelHandlerContext
+interface ServerChannel extends Channel
+interface DuplexChannel extends Channel {
+    ChannelFuture shutdown()
+    ChannelFuture shutdownInput()
+    ChannelFuture shutdownOutput()
+}
+interface SocketChannel extends DuplexChannel
+interface ServerSocketChannel extends ServerChannel
+abstract class AbstractChannel implements Channel
+abstract class AbstractNioChannel extends AbstractChannel
+abstract class AbstractNioMessageChannel extends AbstractNioChannel
+class NioServerSocketChannel extends AbstractNioMessageChannel implements ServerSocketChannel
+abstract class AbstractNioByteChannel extends AbstractNioChannel
+class NioSocketChannel extends AbstractNioByteChannel implements SocketChannel
+
+interface ChannelHandler {
+    handlerAdded(ctx)
+    handlerRemoved(ctx)
+}
+interface ChannelInboundHandler extends ChannelHandler {
+    channelRegistered(ctx)
+    channelUnregistered(ctx)
+    channelActive(ctx)
+    channelInactive(ctx)
+    channelRead(ctx, msg)
+    channelReadComplete(ctx)
+    userEventTriggered(ctx, event)
+    channelWritabilityChanged(ctx)
+    exceptionCaught(ctx, cause)
+}
+abstract class ChannelHandlerAdapter implements ChannelHandler
+interface ChannelOutboundHandler extends ChannelHandler {
+    bind(ctx, localAddress, promise)
+    connect(ctx, remoteAddress, localAddress, promise)
+    disconnect(ctx, promise)
+    close(ctx, promise)
+    deregister(ctx, promise)
+    read(ctx)
+    write(ctx, msg, promise)
+    flush(ctx)
+}
+class ChannelOutboundHandlerAdapter extends ChannelHandlerAdapter implements ChannelOutboundHandler
+class ChannelInboundHandlerAdapter extends ChannelHandlerAdapter implements ChannelInboundHandler
+
+ChannelHandler .up.> DefaultChannelPipeline
+Channel -left-|> ChannelOutboundInvoker
+@enduml

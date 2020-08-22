@@ -1,8 +1,39 @@
 @startuml
-interface ScheduledExecutorService
-interface EventExecutorGroup extends ScheduledExecutorService
-interface EventExecutor extends EventExecutorGroup
+interface java.util.concurrent.Executor {
+    execute(Runnable)
+}
+interface java.util.concurrent.ExecutorService {
+    Future submit(Runnable)
+}
+java.util.concurrent.ExecutorService -left-|> java.util.concurrent.Executor
+interface java.util.concurrent.ScheduledExecutorService extends java.util.concurrent.ExecutorService {
+    ScheduledFuture schedule(Runnable,long,time)
+}
+interface EventExecutorGroup extends java.util.concurrent.ScheduledExecutorService {
+    Future shutdownGracefully()
+    EventExecutor next()
+}
+interface EventExecutor {
+    EventExecutorGroup parent()
+    Promise newPromise()
+}
+EventExecutor -left-|> EventExecutorGroup
 interface OrderedEventExecutor extends EventExecutor
-interface EventLoopGroup extends EventExecutorGroup
-interface EventLoop extends EventLoopGroup,OrderedEventExecutor
+interface EventLoopGroup extends EventExecutorGroup {
+    EventLoop next()
+    ChannelFuture register(Channel)
+}
+interface EventLoop extends EventLoopGroup,OrderedEventExecutor {
+    EventLoopGroup parent()
+}
+class NioEventLoop extends SingleThreadEventLoop
+abstract class SingleThreadEventLoop extends SingleThreadEventExecutor implements EventLoop
+abstract class SingleThreadEventExecutor extends AbstractScheduledEventExecutor implements OrderedEventExecutor
+abstract class AbstractScheduledEventExecutor extends AbstractEventExecutor
+abstract class AbstractEventExecutor extends java.util.concurrent.AbstractExecutorService implements EventExecutor
+abstract class java.util.concurrent.AbstractExecutorService implements java.util.concurrent.ExecutorService
+class NioEventLoopGroup extends MultithreadEventLoopGroup
+abstract class MultithreadEventLoopGroup extends MultithreadEventExecutorGroup implements EventLoopGroup
+abstract class MultithreadEventExecutorGroup extends AbstractEventExecutorGroup
+abstract class AbstractEventExecutorGroup implements EventExecutorGroup
 @enduml
