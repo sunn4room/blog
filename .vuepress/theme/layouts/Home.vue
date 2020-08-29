@@ -210,6 +210,8 @@ export default {
   color var(--fg2)
   p
     margin-bottom 0rem
+  h1
+    display none
 .date-tag
   display inline-block
   margin-top 1rem
