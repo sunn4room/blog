@@ -369,6 +369,19 @@ public interface Xxx {
 private Xxx xxx;
 ```
 
+#### RequestInterceptor
+
+```java
+@Component
+public class MyRequestInterceptor implements RequestInterceptor {
+
+    @Override
+    public void apply(RequestTemplate requestTemplate) {
+        // ...
+    }
+}
+```
+
 ### Dubbo
 
 > **com.alibaba.cloud** `spring-cloud-starter-dubbo`
@@ -1096,6 +1109,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 ```java
 @Configuration
 @EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
     @Bean
     @Qualifier("tokenStore")
@@ -1128,8 +1142,44 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 }
 ```
 
-#### 授权码模式流程
+资源访问流程：
 
 1. /oauth/authorize?client_id=client&response_type=code&scope=scope&redirect_uri=http://localhost:8081，得到授权码 http://localhost:8081/?code=xxxxxx
 2. /oauth/token?client_id=client&client_secret=secret&grant_type=authorization_code&code=xxxxxx&redirect_uri=http://localhost:8081，得到令牌 xxxxxxxxx...
 3. 请求资源时，请求头加上 `Authorization: Bearer xxxxxxxxx...`
+
+#### 单点登录客户端
+
+> 因为需要访问资源，所以添加 openfeign 或者 ribbon 的相关依赖
+
+```java
+@EnableOAuth2Sso
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class ClientSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.antMatcher("/**")
+                .authorizeRequests()
+                .antMatchers("/", "/login**").permitAll()
+                .anyRequest()
+                .authenticated();
+    }
+
+    @Bean // 拦截 feign 请求添加 authentication 头
+    @Autowired
+    public OAuth2FeignRequestInterceptor oAuth2FeignRequestInterceptor(
+            OAuth2ClientContext ctx, OAuth2ProtectedResourceDetails res
+    ) {
+        return new OAuth2FeignRequestInterceptor(ctx, res);
+    }
+    
+    @Bean // ribbon
+    public OAuth2RestTemplate oauth2RestTemplate() {
+        return new OAuth2RestTemplate();
+    }
+
+}
+```
+

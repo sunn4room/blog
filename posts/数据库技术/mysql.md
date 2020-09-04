@@ -106,7 +106,7 @@ SELECT * FROM a WHERE exists (SELECT 1 FROM b WHERE b.id=a.id)
 
 ### 系统配置语句
 
-```mysql
+```sql
 SHOW GLOBAL VARIABLES; -- 查看所有变量
 SELECT @@_global-variable-name; -- 查看单个变量
 SET GLOBAL _global-variable-name=XXX; -- 设置变量值
@@ -219,7 +219,7 @@ $ mysqlbinlog _log_bin_basename.000001
 $ mysqlbinlog --start-position=XXX --stop-position=XXX _log_bin_basename.000001 > recover_file.sql
 ```
 
-```mysql
+```sql
 #临时关闭binlog
 set sql_log_bin=0;
 #执行sql文件

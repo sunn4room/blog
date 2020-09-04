@@ -45,7 +45,7 @@ console.log(
 
 ### 标签
 
-```jade
+```pug
 <tag>(<attr>=xxx <attr>=xxx) <content>
 <tag>(<attr>=xxx <attr>=xxx) = <expression>
 <tag>(<attr>=xxx <attr>=xxx) != <expression> // 不转义
@@ -58,7 +58,7 @@ console.log(
 
 ### 流控制
 
-```jade
+```pug
 case <varible>
   when <v1>
     ...
@@ -68,7 +68,7 @@ case <varible>
     ...
 ```
 
-```jade
+```pug
 for (...)
   ...
 
@@ -76,7 +76,7 @@ each item in <list>
   ...
 ```
 
-```jade
+```pug
 if (...)
   ...
 else if (...)
@@ -85,21 +85,21 @@ else
   ...
 ```
 
-```jade
+```pug
 unless (...)
   ...
 ```
 
 ### 继承
 
-```jade
+```pug
 // a.pug
 ...
 block <blk-name>
   ...
 ```
 
-```jade
+```pug
 // b.pug
 extends a.pug
 block <blk-name>
@@ -112,7 +112,7 @@ block append <blk-name>
 
 ### 混入
 
-```jade
+```pug
 mixin <mx-name>(<param>)
   ...
   block // 原内容
@@ -124,10 +124,10 @@ mixin <mx-name>(<param>)
 
 ### 其他
 
-```jade
+```pug
 doctype html // <!DOCTYPE html>
 ```
 
-```jade
+```pug
 include xxx.pug/css/js
 ```
