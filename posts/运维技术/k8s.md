@@ -101,6 +101,47 @@ minikube kubectl -- xxx
 
 ### kubeadm
 
+```sh
+# master
+$ sudo systemctl enable kubelet
+$ cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+$ sudo sysctl --system
+$ sudo kubeadm init \
+--apiserver-advertise-address=192.168.137.151 \
+--image-repository=registry.aliyuncs.com/google_containers \
+--service-cidr=10.10.0.0/16 \
+--pod-network-cidr=192.168.0.0/16
+$ mkdir -p $HOME/.kube
+$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+$ kubectl edit cm kube-proxy -n kube-system
+$ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
+
+```sh
+# slave
+$ sudo kubeadm join 192.168.137.151:6443 --token xxx... \
+    --discovery-token-ca-cert-hash sha256:xxx...
+```
+
+
+
+### 高可用集群
+
+k8s 集群内的组件中，除了 api server 外，都实现了高可用的功能，而 api server 可以同时存在多个，并同时向外提供 rest 服务
+
+- 需要 HAproxy 解决 api server 的高可用式的负载访问问题
+- 需要 Keepalived 解决 HAproxy 的单点故障问题。
+
+#### Keepalived
+
+
+
+#### HAproxy
+
 
 
 ### kubectl
@@ -697,11 +738,15 @@ kubectl config use-context kubernetes --kubeconfig=<user>.kubeconfig
 
 #### ServiceAccount
 
+代表一个账户标识，pod 在创建时会绑定一个 ServiceAccount，每个命名空间下都有一个默认的 ServiceAccount
+
 ```sh
 kubectl create sa <sa-name>
 ```
 
 #### Role 与 RoleBinding
+
+Role 代表的经典的 RBAC 中的角色，就是定义的权限范围，而 RoleBinding 用于将 Role 和指定的 ServiceAccount 进行绑定，赋予 ServiceAccount 特定的权限。
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -724,7 +769,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: <role-name>
-subjects:
+subjects: # 绑定多个 ServiceAccount
 - kind: ServiceAccount
   name: <sa-name>
   namespace: <sa-namespace>
@@ -809,8 +854,41 @@ helm uninstall <release-name> -n <namespace>
 
 ```yaml
 # xxx.yaml
+
+{{ .Release.Name/Namespace }}
+{{ .Values.xxx | default "xxx" }}
+{{ .Values.xxx | quote }}
+{{ .Values.xxx | indent 4 }}
+{{ .Values.xxx | repeat 4 }}
+{{ .Values.xxx | upper }}
+{{ include "xxx" . }}
+{{ printf "%s-%s" xxx xxx }}
+{{ toYaml xx }}
+
+{{ - with .Values.xx }}
+{{ - end }}
+
+{{ - if xx }}
+{{ - if and xx xx }}
+{{ - if or xx xx }}
+{{ - else if ...}}
+{{ - else }}
+{{ - end }}
+
+{{ - ranger $. xx }}
+{{/* do something with . */}}
+{{ - end }}
+
+{{ (lookup "<apiVersion>" "<resource>" "<namespace>" "<name>").metadata.annotations }}
+{{ range $index, $service := (lookup "v1" "Service" "mynamespace" "").items }}
+    {{/* do something with each service */}}
+{{ end }}
+```
+
+```yaml
+# _helper.tpl
+{{ - define "xx" - }}
 ...
-xxx: {{ Release.Name/Namespace }}
-xxx: {{ Values.xxx | default "xxx" | quote }} # 将替换为 values.yaml 文件中的值
+{{ - end - }}
 ```
 

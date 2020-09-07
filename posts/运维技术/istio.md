@@ -68,7 +68,7 @@ metadata:
   name: xxx
 spec:
   hosts:
-  - xxx # service名 或 gateway 的虚拟主机
+  - xxx # service名 或 gateway 的虚拟主机 或 service entry 的外部地址
   gateways:
   - xxx
   http:
@@ -103,6 +103,10 @@ spec:
         host: xxx #
         subset: xxx # 路由规则的子集名
       weight: xx
+    mirror: # 镜像流量，响应会被丢弃
+      host: httpbin
+      subset: v2
+    mirror_percent: 100 # 镜像百分比
     redirect:
       uri: /xxx
     timeout: 5s # 超时
@@ -118,6 +122,30 @@ spec:
         percentage:
           value: 0.1
         fixedDelay: 5s
+  
+  tls:
+  - match:
+    - port: 443
+    route:
+    - destination:
+        host: xxx
+  
+  tcp:
+  - match:
+    - port: 31400
+    route:
+    - destination:
+        host: tcp-echo
+        port:
+          number: 9000
+        subset: v1
+      weight: 80
+    - destination:
+        host: tcp-echo
+        port:
+          number: 9000
+        subset: v2
+      weight: 20
 ```
 
 ### DestinationRule

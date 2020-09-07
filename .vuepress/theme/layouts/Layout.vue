@@ -74,6 +74,9 @@ export default {
 <style lang="stylus">
 @import '../styles/prism-tmr.css'
 
+.content__default > h1
+  display none
+
 h1, h2, h3, h4, h5, h6, p
   margin-block-start: 0em;
   margin-block-end: 0em;
