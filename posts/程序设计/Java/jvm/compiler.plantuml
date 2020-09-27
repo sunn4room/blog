@@ -1,8 +1,0 @@
-@startuml
-card "源代码" as c1
-card "字节码" as c2
-card "机器码" as c3
-c1 -right-> c2 : 前端编译器
-c2 -right-> c3 : 后端编译器(JIT)
-c1 -right-> c3 : 提前编译器(AOT)
-@enduml
