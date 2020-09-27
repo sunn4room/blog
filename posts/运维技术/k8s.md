@@ -363,11 +363,11 @@ spec:
 
 ### Pod
 
-pod是一组并置的容器组， 代表了Kubemetes中的基本构建单元（不允许跨节点）。在一个 pod 中的多个容器共享同一个 Linux 命名空间，但不共享文件系统。
+pod是一组并置的容器组， 代表了Kubemetes中的基本构建单元（不允许跨节点）。
 
 > **为什么选择 pod 作为构建单元，而不是直接使用容器？**
 >
-> 为了便于通过容器管理其中唯一的进程，如果进程有多个，就容易出现问题，比如终端日志混乱等，不论是 docker 还是 kubernetes 都推荐一个容器一个进程。pod 就是为了实现一个容器一个进程而提出的概念。
+> 为了便于通过容器管理其中唯一的进程，如果进程有多个，就容易出现问题，比如终端日志混乱等，不论是 docker 还是 kubernetes 都推荐一个容器一个进程。pod 就是为了实现一个容器一个进程而提出的概念。但 pod 内的容器总应该有所关联，这些由一个隐形的容器 pause 来负责关联，即一个 pod 中的多个容器共享同一个 Linux 命名空间，但不共享文件系统。
 
 > **Pod 网络**
 >
@@ -404,6 +404,9 @@ spec:
             opreator: In
             values:
             - <label-value>
+  serviceAccountName: xxx
+  initContainers: # 先于containers且顺序执行，可以通过共享卷向主容器提供文件
+  - ... # 初始容器需要一次性执行完毕，并即时销毁
   containers:
   - name: xxx
     image: xxx
@@ -554,7 +557,7 @@ spec:
 不论是 ReplicationController 还是 ReplicaSet 都是通过标签来完成副本操作的，而镜像版本信息并没有绑定到标签信息中，升级时需要修改模板中的版本并手动删除所有的 Pod。 为了协调 Pod 版本升级过程，在 ReplicaSet 之上定义的一个新资源，这样，ReplicaSet 管理 Pod ，而 Deployment 管理 ReplicaSet。升级时会创建一个新的 ReplicaSet，并逐步完成 Pod 的新旧更替到新的 ReplicaSet。触发条件也不仅仅是简单的选择器，还有模板信息的变更也会触发升级（而 RC/RS 不会触发）
 
 ```yaml
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: xxx
@@ -706,7 +709,7 @@ spec:
 
 ### 认证与 RBAC 授权
 
-#### User
+#### User 和 User's Group
 
 ```sh
 # 生成用户私钥
@@ -740,8 +743,12 @@ kubectl config use-context kubernetes --kubeconfig=<user>.kubeconfig
 
 代表一个账户标识，pod 在创建时会绑定一个 ServiceAccount，每个命名空间下都有一个默认的 ServiceAccount
 
-```sh
-kubectl create sa <sa-name>
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: xxx
+  namespace: xxx
 ```
 
 #### Role 与 RoleBinding
@@ -763,16 +770,19 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: <name>
-  namespace: <namespace>
+  name: xxx
+  namespace: xxx
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: <role-name>
-subjects: # 绑定多个 ServiceAccount
+  name: xxx
+subjects: # 绑定多个 ServiceAccount/User/Group
 - kind: ServiceAccount
-  name: <sa-name>
-  namespace: <sa-namespace>
+  name: xxx
+- kind: User
+  name: xxx
+- kind: Group
+  name: xxx
 ```
 
 #### ClusterRole 与 ClusterRoleBinding
@@ -805,6 +815,147 @@ spec:
     ports:
     - port: <port>
 ```
+
+## 扩展
+
+### CustomResourceDefinition
+
+
+
+#### 自定义控制器
+
+#### 自定义 Api Server
+
+### kubebuilder
+
+#### 初始化
+
+```sh
+$ kubebuilder init --domain xxx.xxx --repo xxx
+```
+
+```
+.
+├── bin/
+├── config/
+│   ├── certmanager/
+│   ├── default/
+│   ├── manager/
+│   ├── prometheus/
+│   ├── rbac/
+│   └── webhook/
+├── hack/
+├── Dockerfile
+├── .gitignore
+├── go.mod
+├── go.sum
+├── main.go
+├── Makefile
+└── PROJECT
+```
+
+#### 创建 API 和 Controller
+
+```sh
+$ kubebuilder create api --group xxx --version xx --kind Xxx
+```
+
+> 资源的组是 domain + group
+
+```
+.
+├── api/
+│   └── <version>
+│       ├── <kind>_types.go
+│       ├── groupversion_info.go [元数据信息]
+│       └── zz_generated.deepcopy.go [实现了 runtime.Object]
+└── controllers/
+```
+
+#### 编辑 API
+
+在 api 文件夹下编辑 `<version>/<kind>_types.go`
+
+```go
+// 注意: json 标签是必需的
+
+// XxxSpec 定义了 CronJob 期待的状态
+type XxxSpec struct {
+    // +kubebuilder:validation:
+    Xxx Xxx `json:"xxx"`
+    // +optional
+    Xxx Xxx `json:"xxx,omitempty"`
+}
+
+// XxxStatus 定义了 CronJob 观察的的状态
+type XxxStatus struct {
+	Xxx Xxx `json:"xxx"`
+}
+
+// +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+
+type Xxx struct {
+    metav1.TypeMeta   `json:",inline"`
+    metav1.ObjectMeta `json:"metadata,omitempty"`
+
+    Spec   XxxSpec   `json:"spec,omitempty"`
+    Status XxxStatus `json:"status,omitempty"`
+}
+
+// +kubebuilder:object:root=true
+
+type XxxList struct {
+    metav1.TypeMeta `json:",inline"`
+    metav1.ListMeta `json:"metadata,omitempty"`
+    Items           []Xxx `json:"items"`
+}
+```
+
+```sh
+$ make generate
+```
+
+#### 编辑 Controller
+
+```go
+// +kubebuilder:rbac:groups=xxx,resources=xxxs,verbs=xxx;xxx
+func (r *XxxReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
+    // ...
+    
+    // return ctrl.Result{}, nil
+    // return ctrl.Result{}, err
+    // return ctrl.Result{Requeue: true}, nil
+    // return ctrl.Result{RequeueAfter: time.Second*5}, nil
+}
+
+func (r *XxxReconciler) SetupWithManager(mgr ctrl.Manager) error {
+    return ctrl.NewControllerManagedBy(mgr).
+        For(&xxx.Xxx{}).
+    	Owns(&xxx.Xxx{}).
+        Watches(&xxx.Xxx{}, xxx).
+        Complete(r)
+}
+```
+
+```sh
+$ make manifests
+```
+
+#### 运行
+
+```sh
+$ make install
+$ make run
+$ make docker-build docker-push IMG=<some-registry>/<project-name>:tag
+$ make deploy IMG=<some-registry>/<project-name>:tag
+$ make uninstall
+$ make undeploy
+```
+
+### Service Catalog
+
+
 
 ## Helm
 
@@ -891,4 +1042,6 @@ helm uninstall <release-name> -n <namespace>
 ...
 {{ - end - }}
 ```
+
+
 

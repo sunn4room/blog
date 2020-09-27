@@ -491,11 +491,14 @@ goto 语句可以无条件地转移到过程中指定的行
 ```go
 func xxx() {
     ...
+    defer func() {
+        ...
+    }()
     defer _f1()
     defer _f2()
     defer _f3()
     ...
-} // 函数结束后的执行顺序是 f3 f2 f1
+} // 函数结束后的执行顺序是 f3 f2 f1 func
 ```
 
 defer 的执行时机
@@ -515,7 +518,7 @@ func xxx() {
         if e := recover(); e != nil {
             ...
         }
-    }
+    }()
 }
 ```
 
@@ -581,6 +584,8 @@ func main() {
 $ go run _main_package_path _arg1 _arg2 ...
 $ go fmt
 $ go get
+$ go build
+# CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 ```
 
 ## 标准库
@@ -724,6 +729,12 @@ FormatFloat(f float64, fmt byte, prec, bitSize int) string
 FormatInt(i int64, base int) string
 FormatUint(i uint64, base int) string
 ```
+
+### json
+
+
+
+### template
 
 
 

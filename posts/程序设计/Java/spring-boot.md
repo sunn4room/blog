@@ -20,6 +20,19 @@ Spring Boot 在 Spring 容器的基础上旨在实现 “开箱即用”
 
 > 下面是 Spring Boot 与常见的项目进行整合和使用
 
+Spring Boot 采用 yaml 或者 properties 文件进行配置，通常使用 yaml
+
+```yaml
+xxx:
+  xxx:
+    xxx: xxx
+    xxx: xxx
+  xxx:
+  - xxx: xxx
+  - xxx: xxx
+# ${XXX:xxx} 取值环境变量，没有则取后面的默认值
+```
+
 ## Web
 
 ### WebMVC

@@ -1,14 +1,12 @@
 ---
-title: gRPC 学习笔记
 date: 2020-05-24 17:56:40
 updated: 2020-05-24 17:56:52
-categories:
-- 网络技术
 tags:
-- 学习笔记
 - gRPC
 - RPC
 ---
+
+# gRPC 学习笔记
 
 gRPC 是一个开源的高性能的语言无关的平台无关的 RPC 框架。
 
@@ -18,11 +16,9 @@ gRPC 是一个开源的高性能的语言无关的平台无关的 RPC 框架。
 
 ## protobuf 协议
 
-服务端与客户端的统一接口就是由 protobuf 完成的，平台无关是因为它提供了多平台的工具 protoc，语言无关是因为 protoc 可以把 proto 文件翻译成多种语言的版本。这个工具的下载地址如下：
+服务端与客户端的统一接口就是由 protobuf 完成的，平台无关是因为它提供了多平台的编译工具 protoc，语言无关是因为 protoc 可以把 proto 文件翻译成多种语言的版本。这个工具的下载地址如下：
 
-```http
 https://github.com/protocolbuffers/protobuf/releases
-```
 
 ## proto 文件
 
@@ -54,18 +50,194 @@ protoc --<lang>_out=plugins=grpc:<path-to-dist> <path-to-proto-src>
 
 ## go
 
-通过 ptotoc 命令可以生成 xxx.pb.go 文件
+```go
+import "google.golang.org/grpc"
+```
+
+```sh
+$ go get github.com/golang/protobuf/protoc-gen-go
+$ protoc --go_out=plugins=grpc:xxx xxx.proto 
+```
 
 ### server
 
-- 实现 `<package>.<svc-name>Server` 接口 `<implementor>`
-- `rpcServer := grpc.NewServer()`
-- `<package>.Register<svc-name>Server(rpcServer, &<implementor>{})`
-- `lis, _ := net.Listen("tcp", "<addr>")`
-- `rpcServer.Serve(lis)`
+```go
+import {
+    "google.golang.org/grpc"
+	pb "xxx"
+}
+
+// implement
+
+func main() {
+	lis, err := net.Listen("tcp", port)
+	s := grpc.NewServer()
+	pb.RegisterGreeterService(s, &pb.GreeterService{Xxx: xxx})
+	s.Serve(lis)
+}
+```
 
 ### client
 
-- `conn, _ := grpc.Dial("<addr>", grpc.WithInsecure())`
-- `rpcClient := <package>.New<svc-name>Client(conn)`
-- 通过 `rpcClient` 调用指定的服务方法
+```go
+import {
+    "google.golang.org/grpc"
+	pb "xxx"
+}
+
+func main() {
+	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
+	c := pb.NewXxxClient(conn)
+	r, err := c.SayHello(ctx, &xxx)
+}
+```
+
+## Java
+
+**maven**
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>io.grpc</groupId>
+    <artifactId>grpc-netty-shaded</artifactId>
+    <version>1.31.1</version>
+  </dependency>
+  <dependency>
+    <groupId>io.grpc</groupId>
+    <artifactId>grpc-protobuf</artifactId>
+    <version>1.31.1</version>
+  </dependency>
+  <dependency>
+    <groupId>io.grpc</groupId>
+    <artifactId>grpc-stub</artifactId>
+    <version>1.31.1</version>
+  </dependency>
+  <dependency> <!-- necessary for Java 9+ -->
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>annotations-api</artifactId>
+    <version>6.0.53</version>
+    <scope>provided</scope>
+  </dependency>
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>3.8.1</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+```xml
+<build>
+  <extensions>
+    <extension>
+      <groupId>kr.motd.maven</groupId>
+      <artifactId>os-maven-plugin</artifactId>
+      <version>1.6.2</version>
+    </extension>
+  </extensions>
+  <plugins>
+    <plugin>
+      <groupId>org.xolstice.maven.plugins</groupId>
+      <artifactId>protobuf-maven-plugin</artifactId>
+      <version>0.6.1</version>
+      <configuration>
+        <protocArtifact>com.google.protobuf:protoc:3.12.0:exe:${os.detected.classifier}</protocArtifact>
+        <pluginId>grpc-java</pluginId>
+        <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.32.1:exe:${os.detected.classifier}</pluginArtifact>
+      </configuration>
+      <executions>
+        <execution>
+          <goals>
+            <goal>compile</goal>
+            <goal>compile-custom</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+```
+
+```sh
+$ mvn clean compile
+```
+
+**gradle**
+
+```groovy
+implementation 'io.grpc:grpc-netty-shaded:1.32.1'
+implementation 'io.grpc:grpc-protobuf:1.32.1'
+implementation 'io.grpc:grpc-stub:1.32.1'
+compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+```
+
+```groovy
+plugins {
+    id 'com.google.protobuf' version '0.8.8'
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:3.12.0"
+  }
+  plugins {
+    grpc {
+      artifact = 'io.grpc:protoc-gen-grpc-java:1.32.1'
+    }
+  }
+  generateProtoTasks {
+    all()*.plugins {
+      grpc {}
+    }
+  }
+}
+```
+
+```sh
+$ gradle build
+```
+
+### server
+
+实现接口
+
+```java
+public class XxxImpl extends XxxGrpc.XxxImplBase {
+    @Override
+    public void xxx(Xxx xxx, StreamObserver<Xxx> responseObserver) {
+        Xxx xxx = ...;
+        responseObserver.onNext(xxx);
+        responseObserver.onCompleted();
+    }
+}
+```
+
+开启服务端
+
+```java
+public class XxxServer {
+    public static void main(String[] args) {
+        ServerBuilder.forPort(port).addService(new XxxImpl()).build().start()
+    }
+}
+```
+
+### client
+
+客户端访问服务端
+
+```java
+public class XxxClient {
+    public static void main(String[] args) {
+        ManagedChannel channel = ManagedChannelBuilder.forTarget(target)
+            .usePlaintext()
+            .build();
+        XxxGrpc.XxxBlockingStub blockingStub = XxxGrpc.newBlockingStub(channel);
+        Xxx xxx = ...;
+        Xxx xxx = blockingStub.xxx(xxx);
+    }
+}
+```
+

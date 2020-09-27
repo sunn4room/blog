@@ -382,6 +382,10 @@ public class MyRequestInterceptor implements RequestInterceptor {
 }
 ```
 
+### gRPC
+
+> 官方还没有整合，野生整合包还不完善
+
 ### Dubbo
 
 > **com.alibaba.cloud** `spring-cloud-starter-dubbo`

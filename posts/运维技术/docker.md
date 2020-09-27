@@ -242,7 +242,7 @@ services:
     dns:
     - xx
     - xx
-    network_mod: xx
+    network_mode: xx
     restart: always
     stdin_open: true
     tty: true
@@ -252,6 +252,7 @@ networks:
   xxx:
     driver: bridge
     subnet: xxx.xxx.xxx.xxx/xx
+    external: true
 ```
 
 ```sh

@@ -56,8 +56,6 @@ xxx = xxx
 xxx = xxx
 ```
 
-> 该文件可以自定义配置路径，在 [defaults] 下 `inventory = /xxx/xxx/hosts`
-
 > 但是光写这些还不够，因为底层是通过 ssh 实现的，所以需要进行可信配置和免密配置
 
 #### 可信配置
@@ -75,7 +73,7 @@ xxx = xxx
 
 - ssh 免密命令 `ssh-copy-id`
 - 使用 ansible 的 authenticate_id 模块
-- 在清单文件中配置 ansible_ssh_user 、 ansible_ssh_pass 和 ansible_sudo_pash 变量
+- 在清单文件中配置 ansible_ssh_user 、 ansible_ssh_pass 和 ansible_become_pass 变量
 
 ## ansible 常用模块
 
@@ -115,6 +113,23 @@ xxx = xxx
 - cmd 本地脚本路径
 - chdir 远程执行上下文路径
 
+### template
+
+> 使用了 python 中流行的模板引擎 Jinja2
+
+- src j2 文件路径，默认会查找同级 templates 文件夹
+- dest
+
+```
+{% for xxx in xxxs %}
+ 引用 {{ xxx }}
+{% endfor %}
+
+{% if/elif xxx is defined %}
+ 引用 {{ xxx }}
+{% endif %}
+```
+
 ### user
 
 - user 用户名
@@ -135,25 +150,11 @@ xxx = xxx
     _key: _value # {{ _key }} 引用
   tasks: # 任务列表
   - name: xxx
-    _module: xxx
-    _moduel:
+    _module:
       xxx: xxx
     notify:
-    - _notify-name
-    - _notify-name
-    template:
-      src: xxx
-      dest: xxx
-# ----template----
-#{% for xxx in xxxs %}
-# 引用 {{ xxx }}
-#{% endfor %}
-#
-#{% if xxx is defined %}
-# 引用 {{ xxx }}
-#{% endif %}
-# ----------------
-    
+    - _handler-name
+    - _handler-name
     with_items: # {{ item }} 引用
     - item1
     - item2

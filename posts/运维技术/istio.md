@@ -76,6 +76,8 @@ spec:
     - port: xx
     - uri:
         prefix: /xxx
+        # or
+        exact: /xxx # 注意如果该地址会自动跳转至同前缀的其他地址，要写成 prefix
     - queryParams:
         xxx:
           exact: xxx
@@ -102,6 +104,8 @@ spec:
     - destination:
         host: xxx #
         subset: xxx # 路由规则的子集名
+        port:
+          number: xx
       weight: xx
     mirror: # 镜像流量，响应会被丢弃
       host: httpbin
