@@ -8,7 +8,8 @@ div.post-tags
           :class="{firstca:index == 0, endcd:index == post.frontmatter.categories.length - 1}"
           style="color: white"
         ) {{ca}}
-        span(v-if="index != post.frontmatter.categories.length - 1") &nbsp;>&nbsp;
+        span(v-if="index != post.frontmatter.categories.length - 1")
+          font-awesome-icon(:icon="['fa','caret-right']" style="width:1rem")
   template(v-if="post.frontmatter.tags" v-for="(tag,index) in post.frontmatter.tags")
     a.ta-tag.post-tag(@click="$event.stopPropagation();$emit('postTagClick', ['标签', tag])") {{tag}}
   span.da-tag.post-tag {{$moment(post.frontmatter.date).format('YYYY.MM.DD')}}

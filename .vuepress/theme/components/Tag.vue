@@ -4,7 +4,8 @@ div.tag-wrap
     span.tag-name {{tag.name}}
     span.tag-number {{tag.posts.length}}
   template(v-if="tag.children&&tag.children.length != 0")
-    button.is-father(@click="setShow") {{ showList ? "▼" : "▶" }}
+    button.is-father(@click="setShow")
+      font-awesome-icon(:icon="['fas',showList?'folder-open':'folder']" size="lg" style="margin-left:10px;color:#3298dc")
     div.tag-list(:style="{display: showList?'block':'none'}")
       Tag(@tagClick="tagClick" v-for="t in tag.children" :tag="t")
 </template>

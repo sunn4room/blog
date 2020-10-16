@@ -31,14 +31,15 @@ GlobalLayout(ref="global")
           button(
             v-if="p.excerpt"
             style="background-color: var(--bg1); height:1.2rem; width: 1.2rem;margin-left:0.5rem"
-          ) {{ index == activeIndex ? "▼" : "▶" }}
+          )
+            font-awesome-icon(:icon="['fa',index == activeIndex?'angle-down':'angle-right']" size="lg")
         Collapse(v-if="p.excerpt")
           div(v-show="index == activeIndex")
             div.post-excerpt(v-html="p.excerpt")
     div.box(style="display:flex;justify-content:center;align-items:center")
-      button.page-button(@click="pagedown") ◀
+      font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']" size="sm")
       span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
-      button.page-button(@click="pageup") ▶
+      font-awesome-icon.page-button(@click="pageup" :icon="['fa','angle-right']")
     div.box
       Valine
 </template>
@@ -221,8 +222,8 @@ export default {
   background-color #eee
   color #333
 .page-button
-  height 2rem
-  width 2rem !important
+  height 1.4rem
+  width 1.4rem !important
   padding 0.4rem
   background-color white
   border 1px solid #e1e4e8

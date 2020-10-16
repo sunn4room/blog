@@ -6,18 +6,18 @@
     .dot(style="background-color: #59c837")
   .sh-body
     .line
-      span ▶&nbsp;
+      span >&nbsp;
       span(style="color:#4ebdcf") Who are you?
     .line.right
       span(style="color:#97d209") I'm sunn4room
-      span &nbsp;◀
+      span &nbsp;<
     .line.right
       span(style="color:#97d209") em... Just Sunny Room
-      span &nbsp;◀
+      span &nbsp;<
     .line.right
       span(style="color:#97d209") And you?
-      span.cursor █
-      span &nbsp;◀
+      span.cursor a
+      span &nbsp;<
 </template>
 
 <style lang="stylus">
@@ -64,19 +64,24 @@
 
 .cursor
   color #fec041
+  background-color #fec041
   animation blink 1s linear 1s infinite
 @keyframes blink {
   0% {
     color: #fec04100;
+    background-color: #fec04100;
   }
   50% {
     color: #fec04100;
+    background-color: #fec04100;
   }
   51% {
     color: #fec041;
+    background-color: #fec041;
   }
   100% {
     color: #fec041;
+    background-color: #fec041;
   }
 }
 </style>
