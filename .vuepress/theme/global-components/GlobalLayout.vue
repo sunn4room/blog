@@ -11,8 +11,7 @@
         SunnyRoom
         slot(name="aside")
   #curtain(:class="{asideActive: asideIsActive}" @click="asideIsActive = false")
-  #gesture(:class="{asideActive: asideIsActive}" v-swiperight="toggleAside")
-  main#main
+  main#main(v-swiperight="toggleAside")
     VueScroll(ref="main" @handle-scroll="mainScroll")
       .margin-box
         .white-line
@@ -143,12 +142,6 @@ export default {
   width 100vw
   height 100vh
   background-color #00000000
-  display none
-#gesture
-  z-index 198
-  position fixed
-  width 30vw
-  height 100vh
   display none
 #main
   z-index 100

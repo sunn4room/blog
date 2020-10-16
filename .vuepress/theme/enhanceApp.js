@@ -59,7 +59,7 @@ vueTouch.prototype = {
 			this.touchType == "swipe" && this.vueCallBack(this.binding.value, e);
 			if(Math.abs(disX) > Math.abs(disY)) {
 				if(disX > 10) {
-					this.touchType == "swiperight" && this.vueCallBack(this.binding.value, e);
+					this.touchType == "swiperight" && this.vueTouches.x < 100 && this.vueCallBack(this.binding.value, e);
 				};
 				if(disX < -10) {
 					this.touchType == "swipeleft" && this.vueCallBack(this.binding.value, e);
