@@ -10,13 +10,15 @@
         .white-line
         SunnyRoom
         slot(name="aside")
+  #curtain(:class="{asideActive: asideIsActive}" @click="asideIsActive = false")
+  #gesture(:class="{asideActive: asideIsActive}" v-swiperight="toggleAside")
   main#main
     VueScroll(ref="main" @handle-scroll="mainScroll")
       .margin-box
         .white-line
         slot(name="main")
-  #aside-btn.btn(@click="toggleAside" :class="{asideActive: asideIsActive}") ➤
-  #top-btn.btn(@click="gotoTop" :style="{display: showTopBtn?'inline':'none'}") ➤
+  #top-btn.btn(@click="gotoTop" :style="{display: showTopBtn?'inline':'none'}")
+    font-awesome-icon(:icon="['fas','arrow-up']" size="lg")
 </template>
 
 <script>
@@ -135,6 +137,19 @@ export default {
   font-size 14px
   #logo
     font-size 1.2rem
+#curtain
+  z-index 199
+  position fixed
+  width 100vw
+  height 100vh
+  background-color #00000000
+  display none
+#gesture
+  z-index 198
+  position fixed
+  width 30vw
+  height 100vh
+  display none
 #main
   z-index 100
   position fixed
@@ -146,7 +161,7 @@ export default {
   background-color #f6f8fa
   transition left 0.3s
 .btn
-  z-index 400
+  z-index 150
   position fixed
   height 2.5rem
   width 2.5rem
@@ -159,13 +174,9 @@ export default {
   cursor pointer
   border-radius 0.25rem
   box-shadow 0 1px 6px 0 rgba(0,0,0,0.2)
-#aside-btn
-  display none
-  bottom 3rem
-
 #top-btn
   bottom 7.5rem
-  transform rotate(-90deg)
+  top 50vh
 
 .box
   margin-bottom 1rem
@@ -184,6 +195,11 @@ export default {
     left -300px
     &.asideActive
       left 0px
+  #curtain.asideActive
+    display inline
+    background-color #00000088
+  #gesture
+    display inline
   #main
     left 0px
     width 100vw
