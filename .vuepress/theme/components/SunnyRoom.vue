@@ -22,7 +22,9 @@
 
 <style lang="stylus">
 .shell
-  width 100%
+  width calc(100% - 2rem)
+  margin-left 1rem
+  margin-top 1rem
   height 8.6rem
   background-color #1c1c1c
   border-radius 0.5rem

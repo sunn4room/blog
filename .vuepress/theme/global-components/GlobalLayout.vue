@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
   #header
-    img#hero(:src="require('@theme/assets/hero.png')")
+    img#hero(:src="require('@theme/assets/hero.png')" @click="$router.push('/')")
     span#title {{ $page.title }}
     SearchBox#search-box
   aside#aside(:class="{asideActive: asideIsActive}")
