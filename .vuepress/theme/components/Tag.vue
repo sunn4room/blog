@@ -1,11 +1,11 @@
 <template lang="pug">
 div.tag-wrap
-  a(@click="tagClick(tag.path)")
+  a(@click="tagClick(tag.path)" style="cursor:pointer")
     span.tag-name {{tag.name}}
     span.tag-number {{tag.posts.length}}
   template(v-if="tag.children&&tag.children.length != 0")
-    button(@click="setShow" style="background-color: var(--bg1); height:1.2rem; width: 1.2rem")
-      font-awesome-icon(:icon="['fa',showList?'caret-down':'caret-right']" size="lg" style="color:var(--fg1)")
+    button.is-father(@click="setShow")
+      font-awesome-icon(:icon="['fas',showList?'folder-open':'folder']" size="lg" style="margin-left:10px;color:#3298dc")
     div.tag-list(:style="{display: showList?'block':'none'}")
       Tag(@tagClick="tagClick" v-for="t in tag.children" :tag="t")
 </template>
@@ -38,21 +38,27 @@ export default {
 .tag-list
   margin-left 1rem
 .tag-name, .tag-number
-  font-size 0.9rem
+  font-size 0.8rem
   padding 0.15rem 0.4rem
 .tag-name
   border-radius 0.3rem 0rem 0rem 0.3rem
 .tag-number
   border-radius 0rem 0.3rem 0.3rem 0rem
-  background-color var(--bg2)
-  color var(--fg2)
+  background-color #eeeeee
+  color #222222
 .is-all .tag-name
   color white
-  background-color #909399
+  background-color #363636
 .is-categories .tag-name
   color white
-  background-color var(--blue)
+  background-color #3298dc
 .is-tags .tag-name
   color white
-  background-color var(--green)
+  background-color #48c774
+.is-father
+  background-color: white;
+  height:1.2rem;
+  width: 1.2rem;
+  border: 0 none;
+  outline:none
 </style>

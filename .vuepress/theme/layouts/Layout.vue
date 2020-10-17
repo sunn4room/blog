@@ -1,6 +1,6 @@
 <template lang="pug">
 GlobalLayout(@mainScroll="mainScroll" ref="global")
-  template(v-slot:sidebar)
+  template(#aside)
     div.header-tag(style="font-size:1rem;font-weight:bold;margin-top:1.5rem") {{$page.title}}
     a.header-tag(
       v-for="(h,index) in $page.headers"
@@ -9,25 +9,25 @@ GlobalLayout(@mainScroll="mainScroll" ref="global")
       :href="'#'+h.slug"
       @click="$refs.global.hideSidebar()"
     ) {{h.title}}
-  div.box
-    PostTags(@postTagClick="goHomeWithPath" :post="$page")
-  div.box
-    h1 {{$page.title}}
-    Content
-  div.box
-    PostTags(@postTagClick="goHomeWithPath" :post="$page")
-  div.box
-    Valine
+  template(#main)
+    div.box
+      PostTags(@postTagClick="goHomeWithPath" :post="$page")
+    div.box
+      h1(style="text-align:center") {{$page.title}}
+      Content.markdown-body
+    div.box
+      PostTags(@postTagClick="goHomeWithPath" :post="$page")
+    div.box
+      Valine
 </template>
 
 <script>
-import GlobalLayout from "@theme/components/GlobalLayout.vue";
-var debounce = require('lodash.debounce');
+import debounce from "@theme/utils/debounce.js";
 import PostTags from "@theme/components/PostTags.vue"
 import Valine from "@theme/components/Valine.vue"
 
 export default {
-  components: { GlobalLayout, PostTags, Valine },
+  components: { PostTags, Valine },
   data: () => ({
     curheader: ''
   }),
@@ -35,6 +35,8 @@ export default {
     mainScroll: debounce(function(scrollTop) {
       let hs = this.$page.headers
       if (!hs) return
+      let ch = document.body.clientheight || document.documentElement.clientHeight - 58
+      scrollTop += ch * 0.4
       let temp = 0
       for (let i = 0; i < hs.length; i++) {
         if (scrollTop < document.getElementById(hs[i].slug).offsetTop) break
@@ -68,67 +70,29 @@ export default {
     cates.pop()
     this.$page.frontmatter.categories = cates
   }
-};
+}
 </script>
 
 <style lang="stylus">
-@import '../styles/prism-tmr.css'
+@import '../styles/prism.css'
+@import '../styles/markdown.css'
+
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}
 
 .content__default > h1
   display none
-
-h1, h2, h3, h4, h5, h6, p
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-p, blockquote, ul, ol, dl
-  margin 0.75rem 0rem
-p, ul, ol
-  line-height: 1.6em;
-h1, h2, h3, h4, h5, h6
-  margin-top 2rem
-  margin-bottom 0rem
-  padding-top 0.3rem
-  padding-bottom 0.3rem
-h6
-  font-size 1.1rem
-h5
-  font-size 1.2rem
-h4
-  font-size 1.3rem
-h3
-  font-size 1.4rem
-h2
-  font-size 1.5rem
-  border-bottom 1px solid #ddd
-h1
-  margin-top 1rem
-  font-size 1.7rem
-  text-align center
-li > ol, li > ul
-  margin: 0 0;
-li p.first
-  display: inline-block;
-
-ul,
-ol
-  padding-left: 30px;
-
-ul:first-child,
-ol:first-child
-  margin-top: 0;
-
-ul:last-child,
-ol:last-child
-  margin-bottom: 0.75rem;
-
-blockquote
-  border-left: 4px solid #42b983;
-  font-size: 1rem;
-  background-color: #ecf8f2;
-  color: var(--fg2);
-  padding: 0.1rem 1rem;
-.dark-mode blockquote
-  background-color #1C5538
 a.header-anchor
   font-size: .85em;
   float: left;
@@ -138,30 +102,17 @@ a.header-anchor
   opacity: 0;
 
 .header-tag
-  line-height 1.8rem
-  color var(--fg2)
+  word-wrap: break-word
+  word-break: break-all
+  line-height 1.8em
+  font-size 1em
+  color #111
   display block
   &.active
     color #3eaf7c
     font-weight bold
   &:hover
-    background-color var(--bg2)
+    background-color #eee
   &.endtag
     margin-bottom 1.5rem
-
-table
-  border-collapse collapse
-  margin 1rem 0
-  display: block
-  overflow-x: auto
-
-tr
-  border-top 1px solid #dfe2e5
-
-  &:nth-child(2n)
-    background-color var(--bg2)
-
-th, td
-  border 1px solid #dfe2e5
-  padding .6em 1em
 </style>

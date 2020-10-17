@@ -1,18 +1,10 @@
-import vuescroll from "vuescroll";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import vuescroll from 'vuescroll';
+import moment from 'moment'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import {
-  FontAwesomeIcon,
-  FontAwesomeLayers,
-  FontAwesomeLayersText,
-} from "@fortawesome/vue-fontawesome";
-import moment from 'moment'
-import i18n from './i18n'
-import VueCookies from 'vue-cookies'
-
-
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(fas, far, fab);
 
@@ -67,7 +59,7 @@ vueTouch.prototype = {
 			this.touchType == "swipe" && this.vueCallBack(this.binding.value, e);
 			if(Math.abs(disX) > Math.abs(disY)) {
 				if(disX > 10) {
-					this.touchType == "swiperight" && this.vueCallBack(this.binding.value, e);
+					this.touchType == "swiperight" && this.vueTouches.x < 100 && this.vueCallBack(this.binding.value, e);
 				};
 				if(disX < -10) {
 					this.touchType == "swipeleft" && this.vueCallBack(this.binding.value, e);
@@ -91,51 +83,24 @@ vueTouch.prototype = {
 		this.vueMoves = false;
 	}
 };
- 
- 
-
 
 export default ({
   Vue, // VuePress 正在使用的 Vue 构造函数
   options, // 附加到根实例的一些选项
   router, // 当前应用的路由实例
-  siteData, // 站点元数据
+  siteData // 站点元数据
 }) => {
   // ...做一些其他的应用级别的优化
   Vue.use(vuescroll, {
     ops: {
       bar: {
-        background: "#c1c1c1",
-      },
-    },
-    name: "vue-scroll",
-  });
-  Vue.component("font-awesome-icon", FontAwesomeIcon);
-  Vue.component("font-awesome-layers", FontAwesomeLayers);
-  Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
-  Vue.directive('clickoutside', {
-    bind(el, binding) {
-      function documentHandler(e) {
-        if (el.contains(e.target)) {
-         return false 
-        }
-        
-        if (binding.expression) {
-          binding.value(e)
-        }
+        background: "#c1c1c1"
       }
-      
-      el.__vueMenuHandler__ = documentHandler
-      document.addEventListener('click', el.__vueMenuHandler__)
-    },
-    unbind(el) {
-      document.removeEventListener('click', el.__vueMenuHandler__)
-      delete el.__vueMenuHandler__
-    }
-  })
-  Vue.prototype.$moment = moment
-  Vue.prototype.$i18n = i18n
-  Vue.use(VueCookies)
+    }, // 在这里设置全局默认配置
+    name: 'VueScroll' // 在这里自定义组件名字，默认是vueScroll
+  });
+  Vue.prototype.$moment = moment;
+  Vue.component('font-awesome-icon', FontAwesomeIcon);
   Vue.directive("tap", {
     bind: function(el, binding) {
       new vueTouch(el, binding, "tap");
@@ -171,4 +136,4 @@ export default ({
       new vueTouch(el, binding, "longtap");
     }
   });
-};
+}
