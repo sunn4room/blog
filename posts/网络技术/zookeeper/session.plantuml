@@ -1,0 +1,10 @@
+@startuml
+[*] --> CONNECTING
+CONNECTING -right-> CONNECTED: 连接成功
+CONNECTED -left-> CONNECTING: 连接中断
+CONNECTED -down-> CLOSE: 请求主动关闭
+CONNECTING --> CLOSE: 连接超时
+CONNECTING --> AUTH_FAILED: 权限不够
+CLOSE --> [*]
+AUTH_FAILED --> [*]
+@enduml

@@ -33,6 +33,8 @@ xxx:
 # ${XXX:xxx} 取值环境变量，没有则取后面的默认值
 ```
 
+> mvn spring-boot:run -Dspring-boot.run.jvmArguments="..."
+
 ## Web
 
 ### WebMVC

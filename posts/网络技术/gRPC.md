@@ -12,35 +12,45 @@ gRPC 是一个开源的高性能的语言无关的平台无关的 RPC 框架。
 
 <!-- more -->
 
+![Concept Diagram](gRPC/landing-2.svg)
+
 > RPC 远程过程调用，是一种请求响应模型（http）的一种拓展，即抽象出统一的接口，并封装请求响应，使得客户端调用远程过程和调用本地过程的方式一致。
 
-## protobuf 协议
+## protocol buffers
 
-服务端与客户端的统一接口就是由 protobuf 完成的，平台无关是因为它提供了多平台的编译工具 protoc，语言无关是因为 protoc 可以把 proto 文件翻译成多种语言的版本。这个工具的下载地址如下：
-
-https://github.com/protocolbuffers/protobuf/releases
-
-## proto 文件
+服务端与客户端的**接口**以及**消息体**默认是由 protocol buffers 定义的，文本文件后缀为 proto
 
 ```protobuf
 syntax="proto3";
 package xxx; // proto 的包名，且默认会被用作不同语言的包名
 import "<外部proto文件>";
-option xxx = "xxx";
+option go_package = "xxx"
+option java_package = "xxx";
+option java_outer_classname = "Xxx"
 
-message <msg-name> {
-	<type> <field-name> = 1;
-	// 常用类型 string int32 bool float 自定义type ，详情：
-	//     https://developers.google.cn/protocol-buffers/docs/proto3#scalar
-	// 后面是标识序号，最好不要超过15
-	repeated <type> <field-name> = 2;
-	// repeated 表示多个
-	map<key_type, value_type> <field-name> = 3;
-	// 表示映射类型
+service HelloService {
+  rpc SayHello (HelloRequest) returns (HelloResponse);
+  rpc LotsOfResponses(HelloRequest) returns (stream HelloResponse);
+  rpc LotsOfRequests(stream HelloRequest) returns (HelloResponse);
+  rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
 }
 
-service <svc-name> {
-	rpc <func-name> (<param-list>) returns (<ret-list>);
+message Name {
+  string firstname = 1;
+  string lastname = 2;
+}
+
+message HelloRequest {
+  Name name = 1;
+  string greeting = 2;
+  repeated string addtions = 3;
+}
+
+message HelloResponse {
+  Name name = 1;
+  string reply = 2;
+  repeated string addtions = 3;
+  map<string,string> info = 4;
 }
 ```
 
@@ -48,7 +58,9 @@ service <svc-name> {
 protoc --<lang>_out=plugins=grpc:<path-to-dist> <path-to-proto-src>
 ```
 
-## go
+
+
+## Go
 
 ```go
 import "google.golang.org/grpc"
@@ -68,12 +80,23 @@ import {
 }
 
 // implement
+type xxxServer struct {
+    pb.UnimplementedXxxServer
+}
+
+func (s *xxxServer) Xxx(ctx context.Context, ...) (..., error) {...}
+...
 
 func main() {
-	lis, err := net.Listen("tcp", port)
-	s := grpc.NewServer()
-	pb.RegisterGreeterService(s, &pb.GreeterService{Xxx: xxx})
-	s.Serve(lis)
+    lis, err := net.Listen("tcp", 8080)
+    if err != nil {
+        log.Fatalf("failed to listen: %v", err)
+    }
+    s := grpc.NewServer()
+    pb.RegisterGreeterServer(s, &xxxServer{})
+    if err := s.Serve(lis); err != nil {
+        log.Fatalf("failed to serve: %v", err)
+    }
 }
 ```
 
@@ -87,8 +110,22 @@ import {
 
 func main() {
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
-	c := pb.NewXxxClient(conn)
-	r, err := c.SayHello(ctx, &xxx)
+    if err != nil {
+        log.Fatalf("did not connect: %v", err)
+    }
+    defer conn.Close()
+    c := pb.NewXxxClient(conn)
+
+    // 构造参数
+    
+    ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+    defer cancel()
+    r, err := c.Xxx(ctx, ...)
+    if err != nil {
+        log.Fatalf("could not greet: %v", err)
+    }
+    
+    // 处理结果
 }
 ```
 
@@ -231,13 +268,22 @@ public class XxxServer {
 ```java
 public class XxxClient {
     public static void main(String[] args) {
-        ManagedChannel channel = ManagedChannelBuilder.forTarget(target)
+        ManagedChannel channel = ManagedChannelBuilder
+            .forAddress(host, port)
             .usePlaintext()
             .build();
         XxxGrpc.XxxBlockingStub blockingStub = XxxGrpc.newBlockingStub(channel);
-        Xxx xxx = ...;
+        // XxxGrpc.XxxBlockingStub blockingStub = XxxGrpc.newStub(channel);
+        
+        // 构造参数
+        
         Xxx xxx = blockingStub.xxx(xxx);
+        
+        // 处理结果
     }
 }
 ```
 
+## grpc-gateway
+
+![architecture introduction diagram](gRPC/68747470733a2f2f646f63732e676f6f676c652e636f6d2f64726177696e67732f642f3132687034435071724e5046686174744c5f63496f4a707446766c41716d35774c513067677149356d6b43672f7075623f773d37343926683d333730.png)

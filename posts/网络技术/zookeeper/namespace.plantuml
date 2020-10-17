@@ -1,0 +1,13 @@
+@startuml
+card root as "/"
+card node1 as "/node1"
+card node2 as "/node2"
+card node3 as "/node3"
+node1 <-up- root
+node2 <-up- root
+node3 <-up- root
+card sub1 as "/node1/sub1"
+card sub2 as "/node1/sub2"
+sub1 <-up- node1
+sub2 <-up- node1
+@enduml
