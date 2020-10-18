@@ -41,7 +41,7 @@ export default {
           y: 0,
         },
         500,
-        "easeInQuad"
+        "easeOutQuad"
       );
     },
     mainScroll: debounce(function(vertical, horizontal, nativeEvent) {
@@ -68,18 +68,27 @@ export default {
           {
             y: vertical
           },
-          300,
-          "easeInQuad"
+          500,
+          "easeOutQuad"
         );
       } else if (vertical + 30 > curBottom) {
         this.$refs["aside"].scrollTo(
           {
             y: vertical + 30 - ch
           },
-          300,
-          "easeInQuad"
+          500,
+          "easeOutQuad"
         );
       }
+    },
+    setMainTop(vertical) {
+      this.$refs["main"].scrollTo(
+        {
+          y: vertical
+        },
+        500,
+        "easeOutQuad"
+      );
     }
   },
 };

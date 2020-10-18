@@ -17,6 +17,10 @@ GlobalLayout(ref="global")
           style="font-size:0.9rem;cursor: pointer"
         ) {{ p }}
         span(v-if="index != querypath.length - 1" style="font-size:0.9rem") &nbsp;&nbsp;&frasl;&nbsp;&nbsp;
+    div.box(style="display:flex;justify-content:center;align-items:center")
+      font-awesome-icon.page-button(@click="pagedown" :icon="['fa','angle-left']" size="sm")
+      span.page-info {{p}} / {{Math.ceil(curposts.length / pnum)}}
+      font-awesome-icon.page-button(@click="pageup" :icon="['fa','angle-right']")
     transition-group(name="ps" tag="div" mode="out-in")
       div.box(v-for="(p,index) in postsinpage" :key="p.key+postKeyNum" @click="setActiveIndex(index)")
         PostTags(
@@ -55,7 +59,7 @@ export default {
   data: () => ({
     querypath: [],
     p: 1,
-    pnum: 8,
+    pnum: 10,
     postKeyNum: 0,
     activeIndex: 0
   }),
