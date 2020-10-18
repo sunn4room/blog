@@ -76,7 +76,7 @@ ZooKeeper使用 ACL 来控制访问它的节点。这个 list 的行模式为 `s
 
 ## 集群
 
-![ZooKeeper Service](zookeeper/zkservice.jpg)
+![ZooKeeper Service](./zookeeper/zkservice.jpg)
 
 ### 部署
 

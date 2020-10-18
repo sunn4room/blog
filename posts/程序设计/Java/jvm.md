@@ -17,7 +17,7 @@ JVM（Java Virtual Machine）是对硬件模拟的软件实现，屏蔽的不同
 
 线程栈是由栈帧构成的，如下：
 
-![stackele](jvm/stackele.svg)
+![stackele](./jvm/stackele.svg)
 
 - 局部变量表：用于存放方法参数和方法内部定义的局部变量
 

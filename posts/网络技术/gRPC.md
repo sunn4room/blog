@@ -12,7 +12,7 @@ gRPC 是一个开源的高性能的语言无关的平台无关的 RPC 框架。
 
 <!-- more -->
 
-![Concept Diagram](gRPC/landing-2.svg)
+![Concept Diagram](./gRPC/landing-2.svg)
 
 > RPC 远程过程调用，是一种请求响应模型（http）的一种拓展，即抽象出统一的接口，并封装请求响应，使得客户端调用远程过程和调用本地过程的方式一致。
 
@@ -286,4 +286,4 @@ public class XxxClient {
 
 ## grpc-gateway
 
-![architecture introduction diagram](gRPC/68747470733a2f2f646f63732e676f6f676c652e636f6d2f64726177696e67732f642f3132687034435071724e5046686174744c5f63496f4a707446766c41716d35774c513067677149356d6b43672f7075623f773d37343926683d333730.png)
+![architecture introduction diagram](./gRPC/68747470733a2f2f646f63732e676f6f676c652e636f6d2f64726177696e67732f642f3132687034435071724e5046686174744c5f63496f4a707446766c41716d35774c513067677149356d6b43672f7075623f773d37343926683d333730.png)
