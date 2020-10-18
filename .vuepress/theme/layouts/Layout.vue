@@ -7,7 +7,7 @@ GlobalLayout(@mainScroll="mainScroll" ref="global")
       :style="{fontSize: '1rem', marginLeft: (h.level-1)+'rem'}"
       :class="{active: h.slug == curheader, endtag:index == $page.headers.length - 1}"
       :href="'#'+h.slug"
-      @click="$refs.global.hideSidebar()"
+      @click="headerClick(h)"
     ) {{h.title}}
   template(#main)
     div.box
@@ -48,6 +48,13 @@ export default {
     }, 500),
     goHomeWithPath(qp) {
       this.$router.push({ path: '/', query: { qp: qp.join(">>>") }})
+    },
+    headerClick(h) {
+      console.log(h)
+      const hh = document.querySelector('a.header-anchor[href="#'+h.slug+'"]')
+      let ch = document.body.clientheight || document.documentElement.clientHeight - 58
+      this.$refs.global.setMainTop(hh.offsetTop - ch * 0.2)
+      this.$refs.global.hideSidebar()
     }
   },
   mounted() {
