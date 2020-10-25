@@ -7,7 +7,7 @@ tags:
 
 # TypeScript 学习笔记
 
-type script
+Typescript 是 Javascript 的超集，可以编译成 Javascript ，并且提供编译时的静态类型检查
 
 <!-- more -->
 
@@ -45,7 +45,26 @@ let sentence: string = `Hello, my name is ${ name }.`;
 
 #### interface
 
+接口的作用就是为一个类型命名并定义这个类型的 “契约”。
+
+```typescript
+interface LabelledValue {
+  label: string;
+}
+
+function printLabel(labelledObj: LabelledValue) {
+  console.log(labelledObj.label);
+}
+
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
+```
+
+
+
 #### class
+
+> javascript 也有 class 的概念，相比之下，实现了私有成员、抽象类、抽象方法等特性
 
 ### 数组
 
@@ -103,5 +122,23 @@ let notSure: string | number | Color;
 > let strLength: number = (someValue as string).length;
 > ```
 >
-> 
 
+## 接口
+
+### 对象接口
+
+### 函数接口
+
+### 映射接口
+
+## 函数
+
+## 字面量
+
+## 联合类型
+
+## 类
+
+## 枚举
+
+## 泛型
