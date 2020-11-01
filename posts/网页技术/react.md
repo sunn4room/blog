@@ -2,6 +2,7 @@
 date: 2020-10-22 09:43:07
 tags:
 - js
+- react
 - ui
 ---
 
@@ -34,12 +35,12 @@ $ vim public/index.html
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>hello world</title>
-    </head>
-    <body>
-        <div id="root"></div>
-    </body>
+  <head>
+    <title>hello world</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
 ```
 
@@ -70,9 +71,9 @@ $ yarn start
 const name = "world"
 
 const element = (
-    <h1 className="greeting">
-        Hello, {name}!
-    </h1>;
+  <h1 className="greeting">
+    Hello, {name}!
+  </h1>;
 );
 
 // or
@@ -92,16 +93,16 @@ const element = React.createElement(
 
 ```javascript
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props)
-    },
-    render() {
-        return (
-            <div>
-                <h1>Hello, {this.props.name}</h1>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+  },
+  render() {
+    return (
+      <div>
+        <h1>Hello, {this.props.name}</h1>
+      </div>
+    )
+  }
 }
 ```
 
@@ -109,26 +110,26 @@ class Welcome extends React.Component {
 
 ```javascript
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props);
-        // 设置组件自身的state
-        this.state = {
-            date: new Date()
-        };
-    },
-    render() {
-        return (
-            <div>
-                <h1>Hello, {this.props.name}</h1>
-                {/* 使用state */}
-                <div>date: {this.state.date}</div>
-                {/* 修改state */}
-                <button onClick={() => {this.setState({date: new Date()})}}>
-                    update date
-                </button>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+    // 设置组件自身的state
+    this.state = {
+      date: new Date()
+    };
+  },
+  render() {
+    return (
+      <div>
+        <h1>Hello, {this.props.name}</h1>
+        {/* 使用state */}
+        <div>date: {this.state.date}</div>
+        {/* 修改state */}
+        <button onClick={() => {this.setState({date: new Date()})}}>
+          update date
+        </button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -136,32 +137,32 @@ class Welcome extends React.Component {
 
 ```javascript
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date()
-        };
-        // 为回调绑定this
-        this.handleClick = this.handleClick.bind(this);
-    },
-    // 定义回调
-    handleClick() {
-        this.setState({
-            date: new Date()
-        });
-    }
-    render() {
-        return (
-            <div>
-                <h1>Hello, {this.props.name}</h1>
-                <div>date: {this.state.date}</div>
-                {/* 为事件绑定回调 */}
-                <button onClick={this.handleClick}>
-                    update date
-                </button>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date()
+    };
+    // 为回调绑定this
+    this.handleClick = this.handleClick.bind(this);
+  },
+  // 定义回调
+  handleClick() {
+    this.setState({
+      date: new Date()
+    });
+  },
+  render() {
+    return (
+      <div>
+        <h1>Hello, {this.props.name}</h1>
+        <div>date: {this.state.date}</div>
+        {/* 为事件绑定回调 */}
+        <button onClick={this.handleClick}>
+          update date
+        </button>
+      </div>
+    )
+  }
 }
 ```
 
@@ -169,33 +170,33 @@ class Welcome extends React.Component {
 
 ```javascript
 class ListItem extends React.Component {
-    constructor(props) {
-        super(props)
-    },
-    render() {
-        return <li>{this.props.value}</li>;
-    }
+  constructor(props) {
+    super(props);
+  },
+  render() {
+    return <li>{this.props.value}</li>;
+  }
 }
 
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props)
-    },
-    render() {
-        const numbers = [1,2,3,4,5];
-        const listItems = numbers.map((number) =>
-            // key 应该在数组的上下文中被指定
-            <ListItem key={number.toString()} value={number} />
-        );
-        return (
-            <div>
-                <h1>Hello, {this.props.name}</h1>
-                <ul>
-                    {listItems}
-                </ul>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props)
+  },
+  render() {
+    const numbers = [1,2,3,4,5];
+    const listItems = numbers.map((number) =>
+      // key 应该在数组的上下文中被指定
+      <ListItem key={number.toString()} value={number} />
+    );
+    return (
+      <div>
+        <h1>Hello, {this.props.name}</h1>
+        <ul>
+          {listItems}
+        </ul>
+      </div>
+    )
+  }
 }
 ```
 
@@ -205,23 +206,23 @@ class Welcome extends React.Component {
 
 ```javascript
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // 对应input的内容
-            content: ""
-        };
-    },
-    render() {
-        return (
-            <div>
-                <h1>Hello, {this.props.name}</h1>
-                <input type="text"
-                       value={this.state.content}
-                       onChange={e => {this.setState({content: e.target.value})}} />
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      // 对应input的内容
+      content: ""
+    };
+  },
+  render() {
+    return (
+      <div>
+        <h1>Hello, {this.props.name}</h1>
+        <input type="text"
+               value={this.state.content}
+               onChange={e => {this.setState({content: e.target.value})}} />
+      </div>
+    )
+  }
 }
 ```
 
@@ -308,7 +309,7 @@ const [state, setState] = useState(initialState);
 >
 > - props 改变
 > - state 改变
-> - 父组件重新渲染
+> - 父组件被重新渲染（注意：父子组件不是指组件嵌套关系）
 
 #### useReducer
 
@@ -331,30 +332,30 @@ const [state, dispatch] = useReducer(reducer, initialArg, init);
 
 ```javascript
 useEffect(() => {
-    // 会在每次组件渲染之后异步执行
+  // 会在每次组件渲染之后异步执行
 })
 
 useEffect(() => {
-    // 会在每次组件渲染之后异步执行
-    return () => {
-        // 会在销毁之前执行
-        // 注意：组件的重新渲染也会销毁之前的组件，所以这里也会被执行
-    }
+  // 会在每次组件渲染之后异步执行
+  return () => {
+    // 会在销毁之前执行
+    // 注意：组件的重新渲染也会销毁之前的组件，所以这里也会被执行
+  }
 })
 
 useEffect(() => {
-    // 会在每次组件渲染之后,a b c 有所改变才会被异步执行
-    return () => {
-        // 会在销毁之前执行
-        // 注意：重新渲染时，a b c有所改变才会被执行
-    }
+  // 会在每次组件渲染之后,a b c 有所改变才会被异步执行
+  return () => {
+    // 会在销毁之前执行
+    // 注意：重新渲染时，a b c有所改变才会被执行
+  }
 }, [a, b, c])
 
 useEffect(() => {
-    // 会在组件第一次渲染之后异步执行
-    return () => {
-        // 会在销毁之前执行
-    }
+  // 会在组件第一次渲染之后异步执行
+  return () => {
+    // 会在销毁之前执行
+  }
 }, [])
 ```
 
@@ -419,20 +420,20 @@ $ yarn add react-router-dom
 
 ```xml
 <div>
-    <nav>
-        <Link to="/">Home</Link>
-        <Link to="dashboard">Dashboard</Link>
-    </nav>
-    </Router>
-        <Switch>
-            <Route exact path="/">
-                <Home />
-            </Route>
-            <Route path="/dashboard">
-                <Dashboard />
-            </Route>
-        </Switch>
-    </Router>
+  <nav>
+    <Link to="/">Home</Link>
+    <Link to="dashboard">Dashboard</Link>
+  </nav>
+  <Router>
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
+    </Switch>
+  </Router>
 </div>
 ```
 
@@ -444,14 +445,14 @@ $ yarn add @reach/router
 
 ```xml
 <div>
-    <nav>
-        <Link to="/">Home</Link>
-        <Link to="dashboard">Dashboard</Link>
-    </nav>
-    <Router>
-        <Home path="/" />
-        <Dashboard path="dashboard" />
-    </Router>
+  <nav>
+    <Link to="/">Home</Link>
+    <Link to="dashboard">Dashboard</Link>
+  </nav>
+  <Router>
+    <Home path="/" />
+    <Dashboard path="dashboard" />
+  </Router>
 </div>
 ```
 
@@ -528,9 +529,9 @@ const reducer = combineReducers({
 
 ```javascript
 const MyMiddleware = ({dispatch, getState}) => next => action => {
-    // pre
-    next(action)
-    // post
+  // pre
+  next(action)
+  // post
 }
 
 const store = createStore(<reducer>, applyMiddleware(MyMiddleware, ...))
@@ -547,27 +548,27 @@ react-redux 提供了各种必要的函数和 react 组件，封装了 redux 操
 ```javascript
 // 根据已有UI组件，加入映射后封装成容器组件
 const mapStateToProps = (state, container_props) => ({
-    ui_prop1: xxx,
-    ui_prop2: xxx
+  ui_prop1: xxx,
+  ui_prop2: xxx
 })
 const mapDispatchToProps = (dispatch, container_props) => ({
-    ui_prop3: () => {
-        xxx
-    },
-    ui_prop4: () => {
-        xxx
-    }
+  ui_prop3: () => {
+    xxx
+  },
+  ui_prop4: () => {
+    xxx
+  }
 })
 const ContainerComponent = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(UIComponent)
 
 // 外部再封装一层包含store 的 Provider，这样，Provider 内部的子组件就可以拿到 store
 <Provider store={store}>
-    ...
-    <ContainerComponent ...></ContainerComponent>
-    ...
+  ...
+  <ContainerComponent ...></ContainerComponent>
+  ...
 </Provider>
 ```
 
