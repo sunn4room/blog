@@ -408,21 +408,21 @@ DELETE /myindex/_doc/1
 
 tire
 
-![img](./es/1726451-651153c7d52efe03.webp)
+<img src="./es/image-20201113111723008.png" alt="image-20201113111723008" style="zoom:80%;" />
 
 FST
 
-![img](./es/1726451-33b3aa26a11b57fd.webp)
+<img src="./es/image-20201113111657223.png" alt="image-20201113111657223" style="zoom:80%;" />
 
 ### posting list 压缩
 
 Frame of Reference
 
-![img](./es/1726451-90a5e1bee21e9b75.webp)
+<img src="./es/image-20201113111615302.png" alt="image-20201113111615302" style="zoom:80%;" />
 
 Roaring Bitmap
 
-![img](./es/1726451-47d791bbe583f9f6.webp)
+<img src="./es/image-20201113111518429.png" alt="image-20201113111518429" style="zoom:80%;" />
 
 ## Elastic Stack 生态圈
 
