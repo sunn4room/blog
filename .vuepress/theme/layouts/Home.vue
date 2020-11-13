@@ -216,7 +216,7 @@ export default {
   color #111
   p
     margin-bottom 0rem
-	margin-top 0rem
+    margin-top 0rem
   h1
     display none
 .date-tag
