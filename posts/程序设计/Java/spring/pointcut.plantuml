@@ -1,0 +1,13 @@
+@startuml
+interface Pointcut {
+    getClassFilter()
+    getMethodMatcher()
+}
+interface ExpressionPointcut extends Pointcut {
+    getExpression()
+}
+class AnnotationMatchingPointcut implements Pointcut
+abstract class AbstractExpressionPointcut implements ExpressionPointcut
+class AspectJExpressionPointcut extends AbstractExpressionPointcut
+class ComposablePointcut implements Pointcut
+@enduml

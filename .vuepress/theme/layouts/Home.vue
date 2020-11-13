@@ -211,11 +211,12 @@ export default {
     margin-left 0.5rem
 .post-excerpt
   font-size 0.9
-  margin-top 1rem
+  padding-top 1rem
   line-height 1.6rem
   color #111
   p
     margin-bottom 0rem
+	margin-top 0rem
   h1
     display none
 .date-tag

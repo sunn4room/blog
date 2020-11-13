@@ -1,5 +1,4 @@
 ---
-title: Spring Cloud 学习笔记
 date: 2020-08-16 17:15:58
 tags:
 - 学习笔记
@@ -7,7 +6,9 @@ tags:
 - 微服务
 ---
 
-Spring Cloud 是一整套分布式开发的生态体系，利用 Spring Boot，围绕 Spring Cloud Dependencies 这个核心项目，整合了现如今主流的微服务技术选型。
+# Spring Cloud 学习笔记
+
+Spring Cloud 是一整套分布式开发的生态体系，利用 `Spring Boot`，围绕 Spring Cloud Dependencies 这个核心项目，整合了现如今主流的微服务技术选型。
 
 <!-- more -->
 

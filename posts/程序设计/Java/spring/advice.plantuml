@@ -1,0 +1,22 @@
+@startuml
+interface Advice
+interface Interceptor extends Advice
+interface MethodInterceptor extends Interceptor {
+    invoke()
+}
+interface MethodBeforeAdvice extends BeforeAdvice {
+    before()
+}
+interface BeforeAdvice extends Advice
+interface AfterReturningAdvice extends AfterAdvice {
+    afterReturning()
+}
+interface AfterAdvice extends Advice
+interface ThrowsAdvice extends AfterAdvice
+interface IntroductionInterceptor extends MethodInterceptor, DynamicIntroductionAdvice
+interface DynamicIntroductionAdvice extends Advice {
+    implementsInterface()
+}
+BeforeAdvice -[hidden]right-> AfterAdvice
+AfterAdvice -[hidden]right-> DynamicIntroductionAdvice
+@enduml

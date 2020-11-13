@@ -1,0 +1,12 @@
+@startuml
+interface Advisor {
+    getAdvice()
+}
+interface PointcutAdvisor extends Advisor {
+    getPointcut()
+}
+abstract class AbstractPointcutAdvisor implements PointcutAdvisor
+interface IntroductionAdvisor extends Advisor {
+    getClassFilter()
+}
+@enduml
