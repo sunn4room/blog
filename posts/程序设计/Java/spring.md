@@ -4,6 +4,8 @@ tags:
 - 学习笔记
 - spring
 - java
+- DI
+- AOP
 ---
 
 # Spring 学习笔记

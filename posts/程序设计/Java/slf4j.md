@@ -80,3 +80,39 @@ groupId `org.apache.logging.log4j` artifactId `log4j-slf4j-impl`
 > %r 输出从启动到显示该条日志信息所耗费的时间（毫秒数）
 > %t 输出产生该日志事件的线程名
 > ```
+
+### 初始模板
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+	<Properties>
+		<Property name="LOG_LEVEL_PATTERN">%-5p</Property>
+		<Property name="LOG_TIME_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS}</Property>
+		<Property name="LOG_THREAD_PATTERN">%-15.15t</Property>
+		<Property name="LOG_CLASS_PATTERN">%20.20c{1.}</Property>
+		<Property name="LOG_THROWABLE_PATTERN">%throwable</Property>
+
+		<Property name="CONSOLE_LOG_PATTERN">
+			%highlight{${sys:LOG_LEVEL_PATTERN}} | %style{${sys:LOG_TIME_PATTERN}}{cyan} | %style{${sys:LOG_THREAD_PATTERN}}{blue} | %style{${sys:LOG_CLASS_PATTERN}}{blue} | %msg%n%style{${sys:LOG_THROWABLE_PATTERN}}{red}
+		</Property>
+		<Property name="FILE_LOG_PATTERN">
+			${sys:LOG_LEVEL_PATTERN} | ${sys:LOG_TIME_PATTERN} | ${sys:LOG_THREAD_PATTERN} | ${sys:LOG_CLASS_PATTERN} | %msg%n${sys:LOG_THROWABLE_PATTERN}
+		</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}"/>
+		</Console>
+	</Appenders>
+	
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
+```
+
