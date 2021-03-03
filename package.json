@@ -3,7 +3,7 @@
     "@vuepress/plugin-medium-zoom": "^1.7.1",
     "@vuepress/plugin-register-components": "^1.7.0",
     "@vuepress/plugin-search": "^1.7.0",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "vuepress": "^1.7.0"
   },
