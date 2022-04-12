@@ -22,7 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "2",
     "moment": "^2.29.1",
-    "valine": "^1.4.14",
+    "valine": "^1.4.15",
     "vuescroll": "^4.16.1"
   }
 }
