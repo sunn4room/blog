@@ -1,6 +1,4 @@
 {
-  "name": "sunn4notes",
-  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",

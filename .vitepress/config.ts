@@ -4,7 +4,7 @@ import MarkdownItSup from 'markdown-it-sup'
 import MarkdownItFootnote from'markdown-it-footnote'
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/npm/sunn4notes@latest/.vitepress/dist/' : '/',
+  base: '/',
   title: "sunn4room's notes",
   description: "A collection of my study notes.",
   themeConfig: {
