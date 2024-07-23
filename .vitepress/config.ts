@@ -8,7 +8,7 @@ export default defineConfig({
   description: "A collection of my study notes.",
   themeConfig: {
     logo: {
-      src: '/avatar.png',
+      src: '/logo.png',
     },
     outline: 'deep',
     nav: [
