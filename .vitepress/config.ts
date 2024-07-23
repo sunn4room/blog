@@ -50,7 +50,7 @@ export default defineConfig({
         const token = tokens[index];
         const language = token.info.trim();
         if (language === 'mermaid') {
-          return `<Mermaid id="mermaid-${index}" graph="${encodeURIComponent(token.content)}"></Mermaid>`
+          return `<ClientOnly><Mermaid id="mermaid-${index}" graph="${encodeURIComponent(token.content)}"></Mermaid></ClientOnly>`
         } else if (language === 'chart') {
           return `<Chart config="${encodeURIComponent(token.content)}"></Chart>`
         } else if (language.startsWith('plantuml')) {
