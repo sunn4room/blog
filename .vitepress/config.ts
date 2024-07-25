@@ -20,13 +20,21 @@ export default defineConfig({
 
     sidebar: {
       '/notes/': [
-        { text: 'Welcome', link: '/notes/' },
-        { text: 'Markdown Demo', link: '/notes/markdown-demo' },
+        { items: [
+          { text: 'Welcome', link: '/notes/' },
+          { text: 'Rust', items: [
+            { text: 'Introduction', link: '/notes/rust/intro' },
+          ]},
+          { text: 'Markdown Demo', link: '/notes/markdown-demo' },
+        ]},
       ],
       '/diaries/': [
-        { text: 'Welcome', link: '/diaries/' },
-        { text: '2024-07', items: [
-          { text: '<code>23</code> | VitePress is Awesome', link: '/diaries/vitepress-is-awesome' },
+        { items: [
+          { text: 'Welcome', link: '/diaries/' },
+          // 𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵
+          { text: '2024-07', items: [
+            { text: '𝟮𝟯 VitePress is Awesome', link: '/diaries/vitepress-is-awesome' },
+          ]},
         ]},
       ],
     },

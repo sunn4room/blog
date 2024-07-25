@@ -9,22 +9,25 @@ import { useSidebar } from 'vitepress/theme'
 const { sidebar } = useSidebar()
 
 const TheBody = () => {
-  const elist = []
-  const handle = (items, level) => {
-    for (const item of items) {
-      if (item.items !== undefined) {
-        elist.push(h('h' + level, item.text))
-        handle(item.items, level + 1)
-      } else {
-        if (item.text.startsWith('<code>')) {
-          elist.push(h('p', [h('code', {style: { 'background-color': '#00000000' }}, item.text.substring(6, 8)), h('a', { href: item.link }, item.text.substring(15))]))
-        } else {
-          elist.push(h('p', [h('a', { href: item.link }, item.text)]))
-        }
-      }
+  const render_item = (item) => {
+    if (item.link === undefined) {
+      return item.text
+    } else {
+      return h('a', { href: item.link }, item.text)
     }
   }
-  handle(sidebar.value.slice(1), 3)
-  return elist
+  const render_items = (items) => {
+    console.log(items)
+    const elist = []
+    for (const item of items) {
+      if (item.items === undefined) {
+        elist.push(h('li', [render_item(item)]))
+      } else {
+        elist.push(h('li', [render_item(item), h('ul', { style: { margin: '8px 18px 0' } }, render_items(item.items))]))
+      }
+    }
+    return elist
+  }
+  return render_items(sidebar.value[0].items.slice(1))
 }
 </script>
