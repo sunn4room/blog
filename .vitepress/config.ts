@@ -22,9 +22,16 @@ export default defineConfig({
       '/notes/': [
         { items: [
           { text: 'Welcome', link: '/notes/' },
+          { text: 'Linux', items: [
+            { text: 'bash', link: '/notes/linux/bash' },
+            { text: 'sed', link: '/notes/linux/sed' },
+            { text: 'awk', link: '/notes/linux/awk' },
+            { text: 'grep', link: '/notes/linux/grep' },
+          ]},
           { text: 'Rust', items: [
             { text: 'Introduction', link: '/notes/rust/intro' },
           ]},
+          { text: 'Regular Expression', link: '/notes/regex' },
           { text: 'Markdown Demo', link: '/notes/markdown-demo' },
         ]},
       ],
