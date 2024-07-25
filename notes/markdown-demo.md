@@ -75,7 +75,7 @@ Second paragraph.
 
 [Go to home page](/)
 
-[Go to welcome page](./welcome)
+[Go to welcome page](./)
 
 [VitePress](https://vitepress.dev/)
 
