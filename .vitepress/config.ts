@@ -4,9 +4,9 @@ import MarkdownItSup from 'markdown-it-sup'
 import MarkdownItFootnote from'markdown-it-footnote'
 
 export default defineConfig({
-  base: '/',
-  title: "sunn4room's notes",
-  description: "A collection of my study notes.",
+  title: "sunn4room's blog",
+  description: "A Collection of My Notes and Diaries",
+  head: [['link', { rel: 'icon', href: '/icon.png' }]],
   themeConfig: {
     logo: {
       src: '/logo.png',
@@ -14,13 +14,22 @@ export default defineConfig({
     outline: 'deep',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Notes', link: '/welcome' }
+      { text: 'Notes', link: '/notes/' },
+      { text: 'Diaries', link: '/diaries/' },
     ],
 
-    sidebar: [
-      { text: 'Welcome', link: '/welcome' },
-      { text: 'Markdown Demo', link: '/markdown-demo' }
-    ],
+    sidebar: {
+      '/notes/': [
+        { text: 'Welcome', link: '/notes/' },
+        { text: 'Markdown Demo', link: '/notes/markdown-demo' },
+      ],
+      '/diaries/': [
+        { text: 'Welcome', link: '/diaries/' },
+        { text: '2024-07', items: [
+          { text: '<code>23</code> | VitePress is Awesome', link: '/diaries/vitepress-is-awesome' },
+        ]},
+      ],
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/sunn4room/notes' }

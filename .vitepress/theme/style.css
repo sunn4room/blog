@@ -137,6 +137,6 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
-.logo {
-  border-radius: 1000px;
+.vp-doc a {
+  text-decoration: none;
 }
