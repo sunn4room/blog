@@ -1,81 +1,84 @@
-# Markdown Demo
+# Markdown 示例
 
-## Heading 1
+## 一级标题
 
-Content 1
+一级内容。
 
-### Heading 2
+### 二级标题
 
-Content 2
+二级内容。
 
-#### Heading 3
+#### 三级标题
 
-Content 3
+三级内容。
 
-##### Heading 4
+##### 四级标题
 
-Content 4
+四级内容。
 
-###### Heading 5
+###### 五级标题
 
-Content 5
+五级内容。
 
-## Paragraph
+## 段落
 
-First paragraph.
-First paragraph.
-First paragraph.
-
-Second paragraph.
-Second paragraph.
-Second paragraph.
+段落内容。
+段落内容。
+段落内容。
 
 # Style
 
-*Italic text*
+*斜体*
 
-**Bold text**
+**粗体**
 
-***Italic and bold text***
+***斜粗体***
 
-~~Strikethrough text~~
+~~删除体~~
 
-## Code
+## 代码
 
 `Enter` `Shift` `Ctrl` `Alt`
 
-```html
-<ul>
-  <li v-for="todo in todos" :key="todo.id">
-    {{ todo.text }}
-  </li>
-</ul>
+```java
+class Main {
+    public static void main(String[] args) {
+        System.out.println("hello world");
+    }
+}
 ```
 
-## Alert
+## 引用
 
-> Normal information.
+> 引用内容。
 
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
+## 标记
 
-> [!TIP]
-> Optional information to help a user be more successful.
+::: info
+This is an info box.
+:::
 
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
+::: tip
+This is a tip.
+:::
 
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
+::: warning
+This is a warning.
+:::
 
-> [!CAUTION]
-> Negative potential consequences of an action.
+::: danger
+This is a dangerous warning.
+:::
 
-## Link
+::: details
+This is a details block.
+:::
 
-[Go to home page](/)
+## 链接
 
-[Go to welcome page](./)
+[主页](/)
+
+[索引页](./)
 
 [VitePress](https://vitepress.dev/)
 
@@ -83,35 +86,35 @@ Second paragraph.
 
 vitepress [^1]
 
-## List
+## 列表
 
-- Item 1
-- Item 2
-- Item 3
-  - Subitem 1
+- 项目 1
+- 项目 2
+- 项目 3
+  - 子项目 1
 
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Subitem 1
+1. 项目 1
+1. 项目 2
+1. 项目 3
+   1. 子项目 1
 
-## Table
+## 表格
 
-| Name | Score | Level |
+| 姓名 | 得分 | 等级 |
 | ---- | ----: | :---: |
 | John | 100 | `A+` |
 | Sarah | 90 | `A` |
 | Tom | 80 | `A-` |
 
-## Sub & Sup
+## 上下标
 
 21^st^
 
 H~2~O
 
-## Math
+## 公式
 
-$ax^2 + bx + c = 0$ , when $a \ne 0$ :
+$ax^2 + bx + c = 0$ ， $a \ne 0$ ：
 
 $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
 
@@ -129,7 +132,7 @@ graph TD;
   C-->D;
 ```
 
-## Chartjs
+## Chart.js
 
 ```chart
 {

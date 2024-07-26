@@ -1,4 +1,3 @@
-# Vite & Vue Powered Static Site Generator
+# VitePress
 
-VitePress is a static site generator powered by Vite and Vue.js. It's fast, lightweight, and simple to use.
-
+由 Vite 和 Vue 驱动的静态站点生成器。

@@ -12,22 +12,29 @@ sed -E -i SCRIPT FILE # 修改源文件
 
 ## SCRIPT
 
-`[addr]X[options]`
+`[addr][operation]`
 
 ### addr
 
-- *n*: 行数
-- $: 最后一行
-- /*regexp*/: 正则
-- *start-addr*,*end-addr*: 范围
+| addr | 描述 |
+| --- | --- |
+| `1` | 第一行 |
+| `$` | 最后一行 |
+| `1-3,5-7` | 一至三，五至七行 |
+| `/xxx/` | 正则匹配行 |
 
-### X
+### operation
 
-- a: 下插 `sed '1ahello'`
-- i: 上插 `sed '1ihello'`
-- d: 删除 `sed '1,2d'`
-- c: 修改 `sed '1chello'`
-- s: 取代 `sed 's/hello/你好/'` or `sed 's/hello/你好/g'`
-- p: 打印 `sed -n '$p'`
+| operation | 描述 |
+| --- | --- |
+| `axxx` | 下插 |
+| `a\ xxx` | 下插(行首含空格) |
+| `ixxx` | 上插 |
+| `i\ xxx` | 上插(行首含空格) |
+| `cxxx` | 修改 |
+| `c\ xxx` | 修改(行首含空格) |
+| `d` | 删除 |
+| `s/xxx/xxx/` | 替换 |
+| `s/xxx/xxx/g` | 全替换 |
+| `p` | 打印 |
 
-> `X`的后面空格会被认为是分隔符，不会传入`X`的操作中，若要传入空格要用反斜杠，如`sed '1a\ hello'`
