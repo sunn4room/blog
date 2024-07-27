@@ -10,39 +10,39 @@ export default defineConfig({
   cleanUrls: true,
   themeConfig: {
     nav: [
-      { text: '笔记', link: '/notes/' },
-      { text: '日记', link: '/diaries/' },
+      { text: '笔记', link: '/notes/', activeMatch: '/notes/' },
+      { text: '日记', link: '/diaries/', activeMatch: '/diaries/' },
     ],
     sidebar: {
       '/notes/': [
-        { items: [
-          { text: '索引页', link: '/notes/' },
-          { text: 'Javascript', items: [
-            { text: 'Eslint', link: '/notes/javascript/eslint' },
-            { text: 'Prettier', link: '/notes/javascript/prettier' },
+        { base: '/notes/', items: [
+          { text: '索引页', link: 'index' },
+          { text: 'Javascript', base: '/notes/javascript/', items: [
+            { text: 'Eslint', link: 'eslint' },
+            { text: 'Prettier', link: 'prettier' },
           ]},
-          { text: 'Linux', items: [
-            { text: 'bash', link: '/notes/linux/bash' },
-            { text: 'sed', link: '/notes/linux/sed' },
-            { text: 'awk', link: '/notes/linux/awk' },
-            { text: 'grep', link: '/notes/linux/grep' },
+          { text: 'Linux', base: '/notes/linux/', items: [
+            { text: 'bash', link: 'bash' },
+            { text: 'sed', link: 'sed' },
+            { text: 'awk', link: 'awk' },
+            { text: 'grep', link: 'grep' },
           ]},
-          { text: 'Rust', items: [
-            { text: 'Rust 基础', link: '/notes/rust/base' },
+          { text: 'Rust', base: '/notes/rust/', items: [
+            { text: 'Rust 基础', link: 'base' },
           ]},
-          { text: 'Golang', items: [
-            { text: 'Golang 基础', link: '/notes/golang/base' },
+          { text: 'Golang', base: '/notes/golang/', items: [
+            { text: 'Golang 基础', link: 'base' },
           ]},
-          { text: '正则表达式', link: '/notes/regex' },
-          { text: 'Markdown 示例', link: '/notes/markdown-demo' },
+          { text: '正则表达式', link: 'regex' },
+          { text: 'Markdown 示例', link: 'markdown-demo' },
         ]},
       ],
       '/diaries/': [
-        { items: [
-          { text: '索引页', link: '/diaries/' },
+        { base: '/diaries/', items: [
+          { text: '索引页', link: 'index' },
           // 𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵
           { text: '𝟮𝟬𝟮𝟰-𝟬𝟳', items: [
-            { text: '𝟮𝟯 遇见 VitePress', link: '/diaries/vitepress-is-awesome' },
+            { text: '𝟮𝟯 遇见 VitePress', link: 'vitepress-is-awesome' },
           ]},
         ]},
       ],

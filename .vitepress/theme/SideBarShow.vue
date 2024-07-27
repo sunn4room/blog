@@ -23,10 +23,10 @@ const TheBody = () => {
       if (item.items === undefined) {
         elist.push(h('li', [render_item(item)]))
       } else {
-        elist.push(h('li', [render_item(item), h('ul', { style: { margin: '8px 18px 0' } }, render_items(item.items))]))
+        elist.push(h('li', [render_item(item), render_items(item.items)]))
       }
     }
-    return elist
+    return h('ul', elist)
   }
   return render_items(sidebar.value[0].items.slice(1))
 }
