@@ -10,7 +10,6 @@ export default defineConfig({
   cleanUrls: true,
   themeConfig: {
     nav: [
-      { text: '主页', link: '/' },
       { text: '笔记', link: '/notes/' },
       { text: '日记', link: '/diaries/' },
     ],
@@ -18,6 +17,10 @@ export default defineConfig({
       '/notes/': [
         { items: [
           { text: '索引页', link: '/notes/' },
+          { text: 'Javascript', items: [
+            { text: 'Eslint', link: '/notes/javascript/eslint' },
+            { text: 'Prettier', link: '/notes/javascript/prettier' },
+          ]},
           { text: 'Linux', items: [
             { text: 'bash', link: '/notes/linux/bash' },
             { text: 'sed', link: '/notes/linux/sed' },
@@ -25,10 +28,10 @@ export default defineConfig({
             { text: 'grep', link: '/notes/linux/grep' },
           ]},
           { text: 'Rust', items: [
-            { text: '基础', link: '/notes/rust/base' },
+            { text: 'Rust 基础', link: '/notes/rust/base' },
           ]},
           { text: 'Golang', items: [
-            { text: '基础', link: '/notes/golang/base' },
+            { text: 'Golang 基础', link: '/notes/golang/base' },
           ]},
           { text: '正则表达式', link: '/notes/regex' },
           { text: 'Markdown 示例', link: '/notes/markdown-demo' },
@@ -75,7 +78,7 @@ export default defineConfig({
     sidebarMenuLabel: '菜单',
     returnToTopLabel: '返回顶部',
     outline: { level: 'deep', label: '当前页' },
-    docFooter: { prev: false, next: false },
+    docFooter: { prev: '上一篇', next: '下一篇' },
   },
   markdown: {
     theme: {
