@@ -1,6 +1,6 @@
-# 正则表达式
+# RegExp
 
-Regex是一种从左到右匹配主体字符串的模式。
+RegExp是一种从左到右匹配主体字符串的模式。
 
 > 友情链接：[learn-regex](https://github.com/ziishaned/learn-regex)
 

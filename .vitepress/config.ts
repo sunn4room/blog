@@ -34,7 +34,7 @@ export default defineConfig({
           { text: 'Golang', items: [
             { text: 'Golang 基础', link: '/notes/golang/base' },
           ]},
-          { text: '正则表达式', link: '/notes/regex' },
+          { text: 'RegExp', link: '/notes/regexp' },
           { text: 'EditorConfig', link: '/notes/editorconfig' },
           { text: 'Markdown 示例', link: '/notes/markdown-demo' },
         ]},
@@ -42,8 +42,8 @@ export default defineConfig({
       '/diaries/': [
         { items: [
           { text: '索引页', link: '/diaries/' },
-          { text: '2024-7', items: [
-            { text: '23` 遇见 VitePress', link: '/diaries/vitepress-is-awesome' },
+          { text: '2024年 7月', items: [
+            { text: '23日 遇见 VitePress', link: '/diaries/vitepress-is-awesome' },
           ]},
         ]},
       ],
