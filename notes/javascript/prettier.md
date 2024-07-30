@@ -16,15 +16,12 @@ touch .prettierrc
 
 ```json
 {
-  "printWidth": 80, // editorconfig 'max_line_length'
-  "useTabs": false, // editorconfig 'indent_style'
-  "tabWidth": 2, // editorconfig 'tab_width' or 'indent_size'
-  "endOfLine": "lf", // editorconfig 'end_of_line'
-  "semi": true,
-  "singleQuote": false,
+  "printWidth": 80,
+  "useTabs": false,
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
   "trailingComma": "all",
-  // "trailingComma": "es5",
-  // "trailingComma": "none",
   "bracketSpacing": true,
   "overrides": [
     {
