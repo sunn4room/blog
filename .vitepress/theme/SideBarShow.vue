@@ -17,7 +17,6 @@ const TheBody = () => {
     }
   }
   const render_items = (items) => {
-    console.log(items)
     const elist = []
     for (const item of items) {
       if (item.items === undefined) {
@@ -28,6 +27,6 @@ const TheBody = () => {
     }
     return h('ul', elist)
   }
-  return render_items(sidebar.value[0].items.slice(1))
+  return render_items(sidebar._rawValue[0].items.slice(1))
 }
 </script>
