@@ -52,7 +52,7 @@ export default defineConfig({
       src: '/logo.png',
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/sunn4room/notes' }
+      { icon: 'github', link: 'https://github.com/sunn4room/blog' }
     ],
     search: {
       provider: 'local',
