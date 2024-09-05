@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import MarkdownItSub from 'markdown-it-sub'
 import MarkdownItSup from 'markdown-it-sup'
-import MarkdownItFootnote from'markdown-it-footnote'
+import MarkdownItFootnote from 'markdown-it-footnote'
 
 export default defineConfig({
   title: "sunn4room",
@@ -44,6 +44,9 @@ export default defineConfig({
           { text: '索引页', link: '/diaries/' },
           { text: '2024年 7月', items: [
             { text: '23日 遇见 VitePress', link: '/diaries/vitepress-is-awesome' },
+          ]},
+          { text: '2024年 9月', items: [
+            { text: '4日 优化github访问速度', link: '/diaries/how-to-ac-github-in-china' },
           ]},
         ]},
       ],
